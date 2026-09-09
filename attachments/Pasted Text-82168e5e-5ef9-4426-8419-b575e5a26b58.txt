@@ -1,0 +1,25 @@
+**Here's the prompt — direct, specific, and telling Grok not to repeat the estimation problem that caused this in the first place:**
+
+---
+
+*I'm attaching the actual current menu PDF (faillas-menu-2025.pdf) for Failla's Pizzeria. Cross-check `src/data/menu.ts` against this PDF line by line and fix the following:*
+
+*1. **Cash discount is wrong.** `site.ts` and `facts.ts` currently say "2.88% cash discount." The real menu states "All cash purchases will receive a 3.99% discount" — twice, printed on the PDF. Change 2.88% to 3.99% in both files.*
+
+*2. **Beverages section is incomplete and mispriced.** Replace the current two-line version with all 9 items from the PDF: Fountain Soda $3.25, 20oz Soda $3.00, 2 Liter $4.00, Water Bottle $2.00, Tea/Gatorade $3.25, Milk/Chocolate Milk $3.00, Coffee $2.50, Espresso $3.00, Double Espresso $5.00.*
+
+*3. **Add a Sides section** — it doesn't exist as priced items currently. From the PDF: Side Tossed Salad $5.50, Side Caesar Salad $5.00, Side of Spaghetti $6.00, Side Meatballs (2) $3.50, Side Sausage (2) $4.00, Garlic Bread $3.00 (add cheese $1.00), Plain Roll $2.50, Broccoli or Spinach $3.50.*
+
+*4. **Add a Slices section** — entirely missing. Regular $3.00, Sicilian $3.50, Gourmet Slice $4.00, Toppings $1.00 ea, Gourmet Toppings $1.25 ea.*
+
+*5. **Fix entrée prices that don't match the PDF** — go through every item under "Pasta & Entrees" and correct the price to exactly what's printed. Known errors: Veal Parmigiana should be $23 (currently $26), Chicken Marsala should be $23 (currently $22), Salmon Entrée should be $25 (currently listed as $26).*
+
+*6. **Add missing entrées** not currently in the data at all: Teriyaki Salmon $25, Flounder Platter $23, Flounder Parmesan $23, Veal Marsala $24, Veal Saltimbocca $24.*
+
+*7. **Do a full pass on every remaining category** (pizzas, sandwiches, wraps, salads, stromboli, appetizers, wings, fries, quesadillas, burgers) against the PDF — transcribe exact prices and item names, don't estimate or round. If any item's price or wording is ambiguous or the PDF is unclear, flag it for me rather than guessing.*
+
+*Once done, tell me exactly which categories/items you changed and which (if any) you couldn't verify against the PDF.*
+
+---
+
+**Worth adding while you're at it, since Grok's already in the file:** the contact form (`contact.tsx`) still just does `e.preventDefault(); setSent(true)` and drops every submission, and the Uber Eats link in `site.ts` is a generic `/feed?` search URL instead of the real store page (`ubereats.com/store/faillas-pizzeria-&-ristorante/oOpedRcJUCingV0Udi2bmw`). If you want those fixed in the same pass, tack them on as items 8 and 9 — otherwise keep this prompt scoped to the menu and send those separately.

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quote — Failla's Pizzeria website</title>
+  <style>
+    :root {
+      --ink: #1a120c;
+      --muted: #6d5b4c;
+      --line: #ddcfb8;
+      --paper: #fbf7f0;
+      --gold: #c5a15e;
+      --tomato: #b4232c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e8ddd0;
+      color: var(--ink);
+      font: 15px/1.5 "Segoe UI", system-ui, sans-serif;
+    }
+    .page {
+      max-width: 800px;
+      margin: 24px auto;
+      background: var(--paper);
+      padding: 48px 56px;
+      box-shadow: 0 8px 30px rgba(26,18,12,.12);
+    }
+    header { display: flex; justify-content: space-between; gap: 24px; border-bottom: 3px solid var(--ink); padding-bottom: 20px; }
+    .brand { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    h1 { font-size: 28px; margin: 4px 0 0; font-weight: 650; }
+    .meta { text-align: right; font-size: 13px; color: var(--muted); }
+    .meta strong { color: var(--ink); }
+    .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0; font-size: 14px; }
+    .label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th { text-align: left; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); padding: 8px 0; }
+    td { padding: 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    td.amt, th.amt { text-align: right; white-space: nowrap; }
+    .desc { color: var(--muted); font-size: 13px; margin-top: 2px; }
+    tfoot td { border-bottom: 0; padding-top: 10px; }
+    .total td { font-size: 18px; font-weight: 650; border-top: 2px solid var(--ink); }
+    .note { font-size: 13px; color: var(--muted); margin-top: 28px; }
+    .note h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
+    .pay { width: 100%; margin-top: 8px; }
+    .sign { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+    .line { border-top: 1px solid var(--ink); margin-top: 48px; padding-top: 8px; font-size: 13px; color: var(--muted); }
+    @media print {
+      body { background: white; }
+      .page { margin: 0; box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header>
+      <div>
+        <div class="brand">Quote / Statement of work</div>
+        <h1>Custom restaurant website</h1>
+      </div>
+      <div class="meta">
+        <div><strong>Quote Q-2026-0907</strong></div>
+        <div>September 7, 2026</div>
+        <div>Valid 14 days</div>
+        <div>Fixed-price project</div>
+      </div>
+    </header>
+
+    <div class="parties">
+      <div>
+        <div class="label">From</div>
+        <strong>[Your studio name]</strong><br />
+        [Your name]<br />
+        [Email] · [Phone]
+      </div>
+      <div>
+        <div class="label">Bill to</div>
+        <strong>Failla's Pizzeria & Ristorante</strong><br />
+        2669 Charlestown Rd<br />
+        Phoenixville, PA 19460<br />
+        610-255-2828
+      </div>
+    </div>
+
+    <p style="margin:0 0 20px;font-size:14px;">
+      Fixed-price build of the Failla's website: seven pages, your photos and
+      videos, live hours, ordering, reviews, hiring, and mobile. Not billed by
+      the hour.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th class="amt">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Custom 7-page website
+            <div class="desc">Home, Menu (~105 items / 14 categories), About, Catering, Gallery, Contact, Jobs. Design system, header, footer, mobile nav.</div>
+          </td>
+          <td class="amt">$5,400.00</td>
+        </tr>
+        <tr>
+          <td>
+            Media production
+            <div class="desc">Process and place ~63 photos and 8 kitchen/shop videos. Gallery filters. Award badges.</div>
+          </td>
+          <td class="amt">$1,800.00</td>
+        </tr>
+        <tr>
+          <td>
+            Restaurant systems
+            <div class="desc">Live open/closed hours + holidays, Order Online / DoorDash / Uber Eats / tap-to-call, Google & TripAdvisor, reviews, hiring banner.</div>
+          </td>
+          <td class="amt">$1,200.00</td>
+        </tr>
+        <tr>
+          <td>
+            Mobile QA and launch
+            <div class="desc">Phone layout, tap targets, go-live on your domain. Two revision rounds included.</div>
+          </td>
+          <td class="amt">$600.00</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Subtotal</td>
+          <td class="amt">$9,000.00</td>
+        </tr>
+        <tr>
+          <td>Sales tax</td>
+          <td class="amt">—</td>
+        </tr>
+        <tr class="total">
+          <td>Project total</td>
+          <td class="amt">$9,000.00</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="note">
+      <h2>How you pay</h2>
+      <table class="pay">
+        <tr>
+          <td>Invoice 1 — due on signing (to start)</td>
+          <td class="amt"><strong>$3,600.00</strong> · 40%</td>
+        </tr>
+        <tr>
+          <td>Invoice 2 — due when you approve the preview</td>
+          <td class="amt"><strong>$3,600.00</strong> · 40%</td>
+        </tr>
+        <tr>
+          <td>Invoice 3 — due on launch (domain live)</td>
+          <td class="amt"><strong>$1,800.00</strong> · 20%</td>
+        </tr>
+      </table>
+      <p>
+        Work starts when Invoice 1 clears. Files and domain access transfer when
+        Invoice 3 clears. Extra pages, extra revision rounds, or new photo batches
+        after launch are billed separately.
+      </p>
+      <p>
+        <strong>Not included:</strong> domain (~$15/yr), hosting, Google Ads,
+        photography shoots, a custom ordering system (your CMP / DoorDash / Uber
+        Eats links are wired in). Optional care plan: $175/month after launch
+        (hours, photos, hiring on/off) — billed separately if you want it.
+      </p>
+    </div>
+
+    <div class="sign">
+      <div class="line">Studio — signature / date</div>
+      <div class="line">Failla's — authorized signature / date<br />This signed quote is your purchase order.</div>
+    </div>
+  </article>
+</body>
+</html>

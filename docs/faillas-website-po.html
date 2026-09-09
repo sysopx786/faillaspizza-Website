@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PO — Failla's website</title>
+  <style>
+    :root { --ink: #1a120c; --muted: #6d5b4c; --line: #ddcfb8; --paper: #fbf7f0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #e8ddd0; color: var(--ink); font: 15px/1.5 "Segoe UI", system-ui, sans-serif; }
+    .page { max-width: 800px; margin: 24px auto; background: var(--paper); padding: 48px 56px; box-shadow: 0 8px 30px rgba(26,18,12,.12); }
+    header { display: flex; justify-content: space-between; border-bottom: 3px solid var(--ink); padding-bottom: 20px; }
+    .brand { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    h1 { font-size: 28px; margin: 4px 0 0; }
+    .meta { text-align: right; font-size: 13px; color: var(--muted); }
+    .meta strong { color: var(--ink); }
+    .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0; font-size: 14px; }
+    .label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); padding: 8px 0; }
+    td { padding: 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    td.amt, th.amt { text-align: right; }
+    .desc { color: var(--muted); font-size: 13px; }
+    tfoot td { border: 0; padding-top: 10px; }
+    .total td { font-size: 18px; font-weight: 650; border-top: 2px solid var(--ink); }
+    .note { font-size: 13px; color: var(--muted); margin-top: 28px; }
+    .line { border-top: 1px solid var(--ink); margin-top: 48px; padding-top: 8px; font-size: 13px; color: var(--muted); }
+    @media print { body { background: #fff; } .page { margin: 0; box-shadow: none; padding: 0; } }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header>
+      <div>
+        <div class="brand">Purchase order</div>
+        <h1>Website — Failla's</h1>
+      </div>
+      <div class="meta">
+        <div><strong>PO-FAILLA-001</strong></div>
+        <div>Against quote Q-2026-0907</div>
+        <div>September 7, 2026</div>
+      </div>
+    </header>
+
+    <div class="parties">
+      <div>
+        <div class="label">Buyer</div>
+        <strong>Failla's Pizzeria & Ristorante</strong><br />
+        2669 Charlestown Rd, Phoenixville, PA 19460<br />
+        610-255-2828
+      </div>
+      <div>
+        <div class="label">Vendor</div>
+        <strong>[Your studio name]</strong><br />
+        [Email] · [Phone]
+      </div>
+    </div>
+
+    <p style="font-size:14px;margin:0 0 20px;">
+      Please build the custom Failla's website per quote Q-2026-0907. Fixed price.
+      Do not exceed this PO without a written change order.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Vendor item</th><th class="amt">Amount</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Custom 7-page website<div class="desc">Home, Menu, About, Catering, Gallery, Contact, Jobs</div></td>
+          <td class="amt">$5,400.00</td>
+        </tr>
+        <tr>
+          <td>Media production<div class="desc">Photos, videos, gallery, award badges</div></td>
+          <td class="amt">$1,800.00</td>
+        </tr>
+        <tr>
+          <td>Restaurant systems<div class="desc">Hours, ordering links, reviews, hiring</div></td>
+          <td class="amt">$1,200.00</td>
+        </tr>
+        <tr>
+          <td>Mobile QA and launch</td>
+          <td class="amt">$600.00</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="total"><td>Not to exceed</td><td class="amt">$9,000.00</td></tr>
+      </tfoot>
+    </table>
+
+    <div class="note">
+      <p><strong>Pay on invoices:</strong> 40% signing · 40% preview approval · 20% launch.</p>
+      <p><strong>Ship to / deliver:</strong> Live site on Failla's domain, plus files.</p>
+      <p>This PO accepts quote Q-2026-0907. Extra work needs a change order signed by Failla's.</p>
+    </div>
+    <div class="line">Authorized by Failla's · name / title / date</div>
+  </article>
+</body>
+</html>
