@@ -2,8 +2,11 @@ import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-r
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteLayout } from "@/components/site-layout";
+import { LanguageProvider, STORAGE_KEY } from "@/lib/i18n";
 import { site } from "@/lib/site";
 import appCss from "../styles.css?url";
+
+const LANG_BOOTSTRAP = `(function(){try{var k=${JSON.stringify(STORAGE_KEY)};var l=localStorage.getItem(k);if(!l){var m=document.cookie.match(new RegExp("(?:^|; )"+k+"=([^;]*)"));l=m?decodeURIComponent(m[1]):"";}if(l==="es"||l==="en"||l==="pt"){document.documentElement.lang=l==="pt"?"pt-BR":l;document.documentElement.setAttribute("data-lang",l);}}catch(e){}})();`;
 
 export const Route = createRootRoute({
   head: () => ({
@@ -30,14 +33,17 @@ export const Route = createRootRoute({
   component: () => (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: LANG_BOOTSTRAP }} />
         <HeadContent />
       </head>
       <body>
         <PreviewHostBridge />
         <AuthProvider>
-          <SiteLayout>
-            <Outlet />
-          </SiteLayout>
+          <LanguageProvider>
+            <SiteLayout>
+              <Outlet />
+            </SiteLayout>
+          </LanguageProvider>
         </AuthProvider>
         <Scripts />
       </body>
