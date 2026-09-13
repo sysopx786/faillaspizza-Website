@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Phone, Tent, Truck, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { site } from "@/lib/site";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/catering")({
   component: CateringPage,
@@ -11,20 +12,17 @@ export const Route = createFileRoute("/catering")({
 });
 
 function CateringPage() {
+  const { t } = useI18n();
   return (
     <main>
       <section className="bg-ink text-cream">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">
-              Parties · Schools · Offices
+              {t.catCateringKicker}
             </p>
-            <h1 className="mt-3 font-display text-5xl">Catering, tent & trailer</h1>
-            <p className="mt-4 max-w-lg text-cream/75">
-              Grandma pies by the box, trays of pasta, and a crew that already
-              does school dinners and weekend events. Call the shop — we'll
-              size it.
-            </p>
+            <h1 className="mt-3 font-display text-5xl">{t.catTitle}</h1>
+            <p className="mt-4 max-w-lg text-cream/75">{t.catLead}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href={site.phoneHref}>
                 <Button size="lg">
@@ -33,7 +31,7 @@ function CateringPage() {
               </a>
               <Link to="/contact">
                 <Button size="lg" variant="invert">
-                  Send a note
+                  {t.sendNote}
                 </Button>
               </Link>
             </div>
@@ -50,13 +48,13 @@ function CateringPage() {
         {[
           {
             icon: Truck,
-            title: "Delivery van",
-            text: "Hot food to the house, office, or field. Same kitchen, same Grandma pie.",
+            title: t.vanTitle,
+            text: t.vanText,
           },
           {
             icon: Tent,
-            title: "Vendor tent",
-            text: "We set up at town events and private parties. Portable ovens and a generator if you need us on-site.",
+            title: t.tentTitle,
+            text: t.tentText,
             image: {
               src: "/images/vendor-tent.webp",
               alt: "Failla's vendor tent — Home of the Grandma Pizza, set up for an event",
@@ -64,8 +62,8 @@ function CateringPage() {
           },
           {
             icon: Utensils,
-            title: "Food trailer",
-            text: "Full kitchen and pizza ovens on wheels — for bigger parties and festivals.",
+            title: t.trailerTitle,
+            text: t.trailerText,
           },
         ].map((item) => (
           <article
@@ -102,13 +100,10 @@ function CateringPage() {
           </video>
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-              On the road
+              {t.onTheRoad}
             </p>
-            <h2 className="mt-2 font-display text-4xl">The van</h2>
-            <p className="mt-4 text-muted">
-              Wrapped and running — catering, takeout, dine-in, delivery. Call
-              the shop and we'll send it out.
-            </p>
+            <h2 className="mt-2 font-display text-4xl">{t.theVan}</h2>
+            <p className="mt-4 text-muted">{t.theVanLead}</p>
           </div>
         </div>
       </section>
@@ -129,17 +124,14 @@ function CateringPage() {
             Catering trays of pasta and salad from Failla's
           </video>
           <div>
-            <h2 className="font-display text-4xl">What we send out</h2>
+            <h2 className="font-display text-4xl">{t.whatWeSend}</h2>
             <ul className="mt-4 space-y-2 text-ink-2">
-              <li>Grandma pies — the move for any crowd</li>
-              <li>Tray pasta, parm, salads, and Stromboli</li>
-              <li>School and office dinners (we already do teacher nights)</li>
-              <li>On-site service with the tent or trailer</li>
+              <li>{t.send1}</li>
+              <li>{t.send2}</li>
+              <li>{t.send3}</li>
+              <li>{t.send4}</li>
             </ul>
-            <p className="mt-6 text-sm text-muted">
-              Tell us the headcount, date, and whether you need drop-off or
-              someone working the oven. We'll quote it on the phone.
-            </p>
+            <p className="mt-6 text-sm text-muted">{t.sendQuote}</p>
           </div>
         </div>
       </section>

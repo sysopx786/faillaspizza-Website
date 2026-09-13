@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { categories, disclaimer } from "@/data/menu";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/menu")({
   component: MenuPage,
@@ -14,6 +15,7 @@ export const Route = createFileRoute("/menu")({
 });
 
 function MenuPage() {
+  const { lang, t } = useI18n();
   const [active, setActive] = useState("all");
   const visible = useMemo(
     () => (active === "all" ? categories : categories.filter((c) => c.id === active)),
@@ -25,21 +27,18 @@ function MenuPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-            Dine-in · Takeout · Catering
+            {t.menuKicker}
           </p>
-          <h1 className="mt-2 font-display text-5xl">Menu</h1>
-          <p className="mt-2 max-w-xl text-muted">
-            Grandma pie first. Then everything else a neighborhood Italian kitchen
-            should do. Prices from our July 2025 menu.
-          </p>
+          <h1 className="mt-2 font-display text-5xl">{t.menuTitle}</h1>
+          <p className="mt-2 max-w-xl text-muted">{t.menuLead}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <a href={site.orderUrl} target="_blank" rel="noreferrer">
-            <Button>Order Online</Button>
+            <Button>{t.orderOnline}</Button>
           </a>
           <a href={site.menuPdf} target="_blank" rel="noreferrer">
             <Button variant="outline">
-              <Download /> PDF menu
+              <Download /> {t.pdfMenu}
             </Button>
           </a>
         </div>
@@ -48,7 +47,7 @@ function MenuPage() {
       <div className="sticky top-52 z-20 -mx-4 mt-8 border-y border-line bg-paper/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-lg sm:border sm:px-3">
         <div className="flex gap-2 overflow-x-auto pb-1">
           <Chip active={active === "all"} onClick={() => setActive("all")}>
-            All
+            {t.menuAll}
           </Chip>
           {categories.map((c) => (
             <Chip
@@ -80,7 +79,7 @@ function MenuPage() {
                       <h3 className="font-medium">{item.name}</h3>
                       {item.featured ? (
                         <span className="rounded-full bg-tomato/10 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-tomato">
-                          Favorite
+                          {t.favorite}
                         </span>
                       ) : null}
                       {item.tags?.map((tag) => (
@@ -108,7 +107,9 @@ function MenuPage() {
         ))}
       </div>
 
-      <p className="mt-12 max-w-3xl text-xs leading-relaxed text-muted">{disclaimer}</p>
+      <p className="mt-12 max-w-3xl text-xs leading-relaxed text-muted">
+        {lang === "en" ? disclaimer : t.menuDisclaimer}
+      </p>
     </main>
   );
 }

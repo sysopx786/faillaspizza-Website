@@ -6,7 +6,9 @@ import { GoogleListingCard } from "@/components/google-listing";
 import { Input, Label, Textarea } from "@/components/ui/input";
 import { site } from "@/lib/site";
 import { formatClock, upcomingHolidays } from "@/lib/hours";
-import { useOpenStatus } from "@/components/hours-status";
+import { holidayLabel, holidayNoteLabel, useOpenStatus } from "@/components/hours-status";
+import { hoursDisplayRows } from "@/lib/hours";
+import { hoursLabelsFromCopy, useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -21,19 +23,19 @@ function ContactPage() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const { lang, t } = useI18n();
   const status = useOpenStatus();
   const nextHolidays = upcomingHolidays();
+  const hourRows = hoursDisplayRows(undefined, hoursLabelsFromCopy(t));
 
   return (
     <main className="mx-auto grid max-w-6xl gap-12 px-4 py-12 sm:px-6 lg:grid-cols-2">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-          Find us
+          {t.findUs}
         </p>
-        <h1 className="mt-2 font-display text-5xl">Contact</h1>
-        <p className="mt-3 text-muted">
-          Fastest: call. Walk-ins welcome — we don't take reservations.
-        </p>
+        <h1 className="mt-2 font-display text-5xl">{t.contactTitle}</h1>
+        <p className="mt-3 text-muted">{t.contactLead}</p>
 
         <ul className="mt-8 space-y-5 text-sm">
           <li className="flex gap-3">
@@ -42,7 +44,7 @@ function ContactPage() {
               <a href={site.phoneHref} className="text-lg font-medium hover:underline">
                 {site.phone}
               </a>
-              <p className="text-muted">Dine-in, takeout, catering</p>
+              <p className="text-muted">{t.dineTakeCater}</p>
             </div>
           </li>
           <li className="flex gap-3">
@@ -58,7 +60,7 @@ function ContactPage() {
                 <br />
                 {site.cityLine}
               </a>
-              <p className="text-muted">Corner of Charlestown & Coldstream</p>
+              <p className="text-muted">{t.cornerOf}</p>
             </div>
           </li>
           <li id="hours" className="flex scroll-mt-28 gap-3">
@@ -70,12 +72,12 @@ function ContactPage() {
               </p>
               {status.holidayName ? (
                 <p className="text-tomato">
-                  {status.holidayName}
-                  {status.holidayNote ? ` · ${status.holidayNote}` : ""}
+                  {holidayLabel(status.holidayName, t)}
+                  {status.holidayNote ? ` · ${holidayNoteLabel(status.holidayNote, lang)}` : ""}
                 </p>
               ) : null}
               <ul className="mt-2">
-                {site.hours.map((row) => (
+                {hourRows.map((row) => (
                   <li key={row.days}>
                     <span className="font-medium">{row.days}:</span> {row.time}
                   </li>
@@ -85,11 +87,11 @@ function ContactPage() {
                 <ul className="mt-2 text-muted">
                   {nextHolidays.map((row) => (
                     <li key={row.date}>
-                      <span className="font-medium text-ink">{row.name}:</span>{" "}
+                      <span className="font-medium text-ink">{holidayLabel(row.name, t)}:</span>{" "}
                       {row.open && row.close
                         ? `${formatClock(row.open)} – ${formatClock(row.close)}`
-                        : "Closed"}
-                      {row.note ? ` · ${row.note}` : ""}
+                        : t.closed}
+                      {row.note ? ` · ${holidayNoteLabel(row.note, lang)}` : ""}
                     </li>
                   ))}
                 </ul>
@@ -99,14 +101,13 @@ function ContactPage() {
           <li className="flex gap-3">
             <Wine className="mt-0.5 size-5 text-tomato" />
             <p>
-              BYOB · kids' menu & high chairs · wheelchair accessible · free
-              parking · dogs on the patio · cash discount 3.99%
+              {t.contactAmenities}
             </p>
           </li>
         </ul>
 
         <iframe
-          title="Map to Failla's Pizzeria & Ristorante"
+          title={t.mapTitle}
           src={site.mapsEmbed}
           className="mt-8 h-64 w-full rounded-xl border border-line"
           loading="lazy"
@@ -118,10 +119,9 @@ function ContactPage() {
       <div className="rounded-xl bg-cream p-6 ring-1 ring-line sm:p-8">
         {sent ? (
           <div>
-            <h2 className="font-display text-3xl">Got it</h2>
+            <h2 className="font-display text-3xl">{t.gotIt}</h2>
             <p className="mt-3 text-muted">
-              Your mail app should have opened with the note filled in. If it
-              didn't, call{" "}
+              {t.gotItLead}{" "}
               <a href={site.phoneHref} className="font-medium text-tomato">
                 {site.phone}
               </a>
@@ -134,7 +134,7 @@ function ContactPage() {
               </p>
             ) : null}
             <a href={site.phoneHref} className="mt-6 inline-flex">
-              <Button>Call now</Button>
+              <Button>{t.callNow}</Button>
             </a>
           </div>
         ) : (
@@ -152,13 +152,10 @@ function ContactPage() {
               setSent(true);
             }}
           >
-            <h2 className="font-display text-3xl">Send a note</h2>
-            <p className="text-sm text-muted">
-              Catering, a question, a Friday Grandma pie for 20 — drop it here.
-              Call if you need us the same hour.
-            </p>
+            <h2 className="font-display text-3xl">{t.sendNote}</h2>
+            <p className="text-sm text-muted">{t.sendNoteLead}</p>
             <div className="space-y-1.5">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">{t.labelName}</Label>
               <Input
                 id="name"
                 required
@@ -168,7 +165,7 @@ function ContactPage() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="phone">Phone</Label>
+              <Label htmlFor="phone">{t.labelPhone}</Label>
               <Input
                 id="phone"
                 type="tel"
@@ -179,7 +176,7 @@ function ContactPage() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t.labelEmail}</Label>
               <Input
                 id="email"
                 type="email"
@@ -189,7 +186,7 @@ function ContactPage() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="message">Message</Label>
+              <Label htmlFor="message">{t.labelMessage}</Label>
               <Textarea
                 id="message"
                 required
@@ -198,7 +195,7 @@ function ContactPage() {
               />
             </div>
             <Button type="submit" className="w-full sm:w-auto">
-              Submit
+              {t.submit}
             </Button>
           </form>
         )}

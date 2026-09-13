@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GoogleListingCard } from "@/components/google-listing";
 import { site } from "@/lib/site";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -10,45 +11,26 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
+  const { t } = useI18n();
   return (
     <main>
       <section className="bg-ink text-cream">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">
-            Our story
+            {t.aboutKicker}
           </p>
           <h1 className="mt-3 max-w-3xl font-display text-5xl">
-            Sicily in the recipes. Phoenixville in the dining room.
+            {t.aboutTitle}
           </h1>
         </div>
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
         <div className="space-y-5 text-base leading-relaxed text-ink-2">
-          <p>
-            Failla's Pizzeria & Ristorante is a family-owned kitchen on
-            Charlestown Road, in the old Stables Bar building. The cooking comes
-            from Sicily — the largest island in the Mediterranean, and the place
-            generations of the family learned to feed people.
-          </p>
-          <p>
-            We opened this room to do two things well: a serious Grandma pie,
-            and the rest of an Italian menu that doesn't phone it in. Sauce
-            is made here. The plum tomatoes on the Grandma are still crushed by
-            hand in the back. Gelato is made by the family. Portions are the
-            size your grandmother would call correct.
-          </p>
-          <p>
-            The dining room is small, bright, and busy with takeout. That's
-            the point. Walk in. Bring wine — we're BYOB. Sit on the patio
-            with the dog if the weather's decent. Friday nights the Grandma
-            pies go out in stacks. If you want one, order a little early.
-          </p>
-          <p>
-            We cook for this town: school dinners, weekend pies, the cheesesteak
-            that is not a side note. If you grew up on this kind of food, you
-            already know the taste. If you didn't, start with the Grandma.
-          </p>
+          <p>{t.aboutP1}</p>
+          <p>{t.aboutP2}</p>
+          <p>{t.aboutP3}</p>
+          <p>{t.aboutP4}</p>
         </div>
         <div className="grid gap-4">
           <video

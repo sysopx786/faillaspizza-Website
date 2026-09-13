@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { photos } from "@/data/photos";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
@@ -11,17 +12,17 @@ export const Route = createFileRoute("/gallery")({
   }),
 });
 
-const filters = [
-  { id: "all", label: "All" },
-  { id: "video", label: "Videos" },
-  { id: "pizza", label: "Pizza" },
-  { id: "pasta", label: "Pasta" },
-  { id: "salad", label: "Salads" },
-  { id: "plates", label: "Plates" },
-  { id: "shop", label: "The shop" },
-] as const;
-
 function GalleryPage() {
+  const { t } = useI18n();
+  const filters = [
+    { id: "all" as const, label: t.filterAll },
+    { id: "video" as const, label: t.filterVideos },
+    { id: "pizza" as const, label: t.filterPizza },
+    { id: "pasta" as const, label: t.filterPasta },
+    { id: "salad" as const, label: t.filterSalads },
+    { id: "plates" as const, label: t.filterPlates },
+    { id: "shop" as const, label: t.filterShop },
+  ];
   const [filter, setFilter] = useState<(typeof filters)[number]["id"]>("all");
   const list = useMemo(() => {
     if (filter === "all") return photos;
@@ -32,13 +33,10 @@ function GalleryPage() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-        From the kitchen
+        {t.galleryKicker}
       </p>
-      <h1 className="mt-2 font-display text-5xl">Gallery</h1>
-      <p className="mt-2 max-w-xl text-muted">
-        Real plates from Failla's — kitchen videos, Grandma pies, salads, pasta,
-        the dining room, the van, the night sign.
-      </p>
+      <h1 className="mt-2 font-display text-5xl">{t.galleryTitle}</h1>
+      <p className="mt-2 max-w-xl text-muted">{t.galleryLead}</p>
 
       <div className="mt-8 flex gap-2 overflow-x-auto pb-2">
         {filters.map((f) => (
