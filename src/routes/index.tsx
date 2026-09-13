@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { GoodToKnow } from "@/components/good-to-know";
 import { ReviewQuotes, ReviewSummary } from "@/components/reviews";
 import { site } from "@/lib/site";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
+  const { t } = useI18n();
   return (
     <main>
       <section className="relative min-h-[78vh] overflow-hidden bg-ink text-cream">
@@ -20,15 +22,14 @@ function Home() {
         <div className="relative mx-auto flex min-h-[auto] max-w-6xl flex-col justify-start gap-8 px-4 py-12 sm:px-6 lg:min-h-[78vh] lg:flex-row lg:items-end lg:justify-between lg:py-16">
           <div className="max-w-xl">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold-soft">
-              Phoenixville, Pennsylvania
+              {t.homeKicker}
             </p>
             <h1 className="mt-3 font-display text-5xl leading-[0.95] text-cream sm:text-6xl">
-              Home of the
+              {t.homeTitle1}
               <span className="block italic text-gold-soft">Grandma Pizza</span>
             </h1>
             <p className="mt-5 max-w-md text-base leading-relaxed text-cream/80">
-              Family-owned Sicilian cooking — pan-baked pies, red-sauce classics,
-              steaks, and salads. Walk in, call ahead, or order online.
+              {t.homeLead}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -37,21 +38,21 @@ function Home() {
                 rel="noreferrer"
                 className="hidden lg:inline-flex"
               >
-                <Button size="lg">Order Online</Button>
+                <Button size="lg">{t.orderOnline}</Button>
               </a>
               <a href={site.phoneHref}>
                 <Button size="lg" variant="invert">
-                  <Phone /> Call {site.phone}
+                  <Phone /> {t.call} {site.phone}
                 </Button>
               </a>
               <Link to="/menu">
                 <Button size="lg" variant="ghost" className="border border-white/20">
-                  View menu
+                  {t.viewMenu}
                 </Button>
               </Link>
             </div>
             <p className="mt-4 inline-flex items-center rounded-full border border-gold-soft/50 bg-ink/50 px-3.5 py-1.5 text-sm font-medium text-gold-soft">
-              Pickup orders are fastest by phone.
+              {t.pickupFastest}
             </p>
           </div>
           <div className="w-full max-w-sm overflow-hidden rounded-xl border border-white/10 shadow-2xl lg:mb-2">
@@ -70,14 +71,14 @@ function Home() {
             <MapPin className="mt-0.5 size-4 text-gold-soft" />
             <p>
               <span className="block font-medium text-cream">{site.addressLine}</span>
-              <span className="text-cream/70">{site.cityLine} · BYOB · patio</span>
+              <span className="text-cream/70">{site.cityLine} · {t.byobPatio}</span>
             </p>
           </div>
           <div className="flex items-start gap-3 text-sm">
             <Wine className="mt-0.5 size-4 text-gold-soft" />
             <p>
-              <span className="block font-medium text-cream">Dine-in, takeout, delivery</span>
-              <span className="text-cream/70">Catering van, tent & food trailer</span>
+              <span className="block font-medium text-cream">{t.dineTakeDeliver}</span>
+              <span className="text-cream/70">{t.cateringVanLine}</span>
             </p>
           </div>
         </div>
@@ -87,38 +88,38 @@ function Home() {
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-              What people come back for
+              {t.regularsKicker}
             </p>
-            <h2 className="mt-2 font-display text-4xl">The regulars' order</h2>
+            <h2 className="mt-2 font-display text-4xl">{t.regularsTitle}</h2>
           </div>
           <Link
             to="/menu"
             className="hidden items-center gap-1 text-sm font-medium text-tomato sm:inline-flex"
           >
-            Full menu <ArrowRight className="size-4" />
+            {t.fullMenu} <ArrowRight className="size-4" />
           </Link>
         </div>
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
               src: "/images/grandma-pie.webp",
-              title: "Grandma Pie",
-              text: "Crisp pan, fresh mozzarella, sauce the owner still crushes by hand.",
+              title: t.cardGrandma,
+              text: t.cardGrandmaText,
             },
             {
               src: "/images/failladelphia-stromboli.webp",
-              title: "Failladelphia",
-              text: "Ribeye, Cooper Sharp, smoked mozzarella, sesame crust. Steak or stromboli.",
+              title: t.cardFailla,
+              text: t.cardFaillaText,
             },
             {
               src: "/images/shrimp-pasta.webp",
-              title: "Pasta & Parm",
-              text: "Rosa shrimp, eggplant rollatini, chicken parm — the ristorante half of the sign.",
+              title: t.cardPasta,
+              text: t.cardPastaText,
             },
             {
               src: "/images/burrata-salad.webp",
-              title: "Salads",
-              text: "Burrata, caprese, house Italian. Fresh, not an afterthought.",
+              title: t.cardSalads,
+              text: t.cardSaladsText,
             },
           ].map((item) => (
             <article
@@ -139,16 +140,12 @@ function Home() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">
-              From the oven
+              {t.ovenKicker}
             </p>
-            <h2 className="mt-2 font-display text-4xl">Pies coming off the pass</h2>
-            <p className="mt-4 text-cream/75">
-              White and ranch, cheesesteak-fries, sausage and pepperoni, a
-              straight cheese, BBQ lattice, then the Grandma. This is a Friday
-              on the steel.
-            </p>
+            <h2 className="mt-2 font-display text-4xl">{t.ovenTitle}</h2>
+            <p className="mt-4 text-cream/75">{t.ovenLead}</p>
             <Link to="/gallery" className="mt-6 inline-flex">
-              <Button variant="gold">More from the kitchen</Button>
+              <Button variant="gold">{t.moreKitchen}</Button>
             </Link>
           </div>
           <video
@@ -171,15 +168,12 @@ function Home() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-              The shop
+              {t.shopKicker}
             </p>
-            <h2 className="mt-2 font-display text-4xl">Walk up to the counter</h2>
-            <p className="mt-4 text-muted">
-              Pies in the case, the kitchen behind the glass, merch on the wall.
-              Order at the counter, sit down, or take it home — this is the room.
-            </p>
+            <h2 className="mt-2 font-display text-4xl">{t.shopTitle}</h2>
+            <p className="mt-4 text-muted">{t.shopLead}</p>
             <Link to="/gallery" className="mt-6 inline-flex">
-              <Button variant="outline">See the shop</Button>
+              <Button variant="outline">{t.seeShop}</Button>
             </Link>
           </div>
           <div className="grid gap-3">
@@ -200,19 +194,12 @@ function Home() {
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-            Sicily · Phoenixville
+            {t.sicilyKicker}
           </p>
-          <h2 className="mt-2 font-display text-4xl">
-            A family kitchen with a Sicilian backbone
-          </h2>
-          <p className="mt-4 text-muted">
-            Failla's is family-owned, rooted in recipes from Sicily, and built
-            for this town — weeknight takeout, Friday Grandma rushes, school
-            catering, and a table if you walk in. No reservations. Generous
-            portions. You're not a ticket number.
-          </p>
+          <h2 className="mt-2 font-display text-4xl">{t.sicilyTitle}</h2>
+          <p className="mt-4 text-muted">{t.sicilyLead}</p>
           <Link to="/about" className="mt-6 inline-flex">
-            <Button>Our story</Button>
+            <Button>{t.ourStory}</Button>
           </Link>
         </div>
         <img
@@ -231,22 +218,18 @@ function Home() {
           />
           <div className="order-1 lg:order-2">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">
-              Catering & events
+              {t.cateringHomeKicker}
             </p>
-            <h2 className="mt-2 font-display text-4xl">We come to you</h2>
-            <p className="mt-4 text-cream/75">
-              Delivery van, vendor tent, and a food trailer with pizza ovens and a
-              full kitchen. Parties, schools, offices — call and we'll build the
-              order.
-            </p>
+            <h2 className="mt-2 font-display text-4xl">{t.weCome}</h2>
+            <p className="mt-4 text-cream/75">{t.weComeLead}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link to="/catering">
                 <Button variant="gold">
-                  <Truck /> Catering
+                  <Truck /> {t.navCatering}
                 </Button>
               </Link>
               <a href={site.phoneHref}>
-                <Button variant="invert">Call to book</Button>
+                <Button variant="invert">{t.callToBook}</Button>
               </a>
             </div>
           </div>
@@ -256,14 +239,10 @@ function Home() {
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-            Dine-in
+            {t.dineinKicker}
           </p>
-          <h2 className="mt-2 font-display text-4xl">Sit down. Stay for the pie.</h2>
-          <p className="mt-4 text-muted">
-            The dining room is small, bright, and busy — weeknights, birthdays,
-            pizza still on the tray. Walk in, no reservations. Bring wine.
-            Phone charging at the seat, QR for the menu while you wait.
-          </p>
+          <h2 className="mt-2 font-display text-4xl">{t.dineinTitle}</h2>
+          <p className="mt-4 text-muted">{t.dineinLead}</p>
         </div>
         <div className="grid gap-4">
           <img
@@ -292,9 +271,9 @@ function Home() {
       <section id="visit" className="border-t border-line bg-paper-2">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-            Good to know
+            {t.gtkKicker}
           </p>
-          <h2 className="mt-2 font-display text-4xl">Before you come in</h2>
+          <h2 className="mt-2 font-display text-4xl">{t.gtkTitle}</h2>
           <div className="mt-10">
             <GoodToKnow />
           </div>
@@ -313,7 +292,7 @@ function Home() {
             rel="noreferrer"
             className="mt-8 inline-flex"
           >
-            <Button variant="outline">See all reviews on Google</Button>
+            <Button variant="outline">{t.seeAllReviews}</Button>
           </a>
         </div>
       </section>
