@@ -7,204 +7,55 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --ink: #1a120c;
-      --ink-2: #241810;
-      --cream: #f4eadb;
-      --paper: #f7f1e6;
-      --gold: #c9a24a;
-      --gold-soft: #e0c078;
-      --tomato: #c23b22;
-      --muted: #6b5a4a;
-      --line: #e2d4bf;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: Outfit, system-ui, sans-serif; }
-    a { color: inherit; text-decoration: none; }
-    header { background: var(--ink); color: var(--cream); border-bottom: 1px solid rgba(255,255,255,.1); }
-    .bar { max-width: 72rem; margin: 0 auto; padding: 0 1rem; display: flex; align-items: center; gap: .75rem; height: 4.25rem; }
-    .logo { display: flex; align-items: center; gap: .75rem; min-width: 0; }
-    .logo img { width: 3rem; height: 3rem; border-radius: .4rem; object-fit: cover; }
-    .brand { font-family: "Cormorant Garamond", serif; font-size: 1.35rem; color: var(--gold-soft); line-height: 1; }
-    .sub { display: block; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(244,234,219,.7); margin-top: .2rem; }
-    nav { margin-left: auto; display: none; gap: .15rem; }
-    @media (min-width: 900px) { nav { display: flex; } }
-    nav a { padding: .5rem .75rem; font-size: .9rem; color: rgba(244,234,219,.8); }
-    .chip { display: inline-flex; height: 2.6rem; overflow: hidden; border-radius: .7rem; background: var(--gold); color: var(--ink); }
-    .chip button { appearance: none; border: 0; background: transparent; color: inherit; font: inherit; font-weight: 700; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; padding: 0 .85rem; display: inline-flex; align-items: center; gap: .4rem; cursor: pointer; }
-    .chip button + button { border-left: 1px solid rgba(26,18,12,.25); }
-    .chip button:hover { background: var(--gold-soft); }
-    .flag { width: 1.15rem; height: .8rem; border-radius: 2px; display: block; }
-    .actions { background: var(--ink-2); border-top: 1px solid rgba(255,255,255,.1); }
-    .actions-inner { max-width: 72rem; margin: 0 auto; padding: .65rem 1rem; display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: .45rem; padding: .45rem .85rem; font-size: .85rem; font-weight: 600; border: 0; cursor: pointer; }
-    .btn-tomato { background: var(--tomato); color: #fff; }
-    .btn-ghost { background: transparent; color: var(--cream); border: 1px solid rgba(255,255,255,.25); }
-    .hero { position: relative; min-height: 78vh; background: var(--ink); color: var(--cream); overflow: hidden; display: flex; align-items: end; }
-    .hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; }
-    .hero .shade { position: absolute; inset: 0; background: linear-gradient(90deg, #1a120c 0%, rgba(26,18,12,.75) 55%, rgba(26,18,12,.25) 100%); }
-    .hero-inner { position: relative; max-width: 72rem; margin: 0 auto; padding: 3rem 1rem; width: 100%; display: grid; gap: 2rem; }
-    @media (min-width: 900px) { .hero-inner { grid-template-columns: 1fr 22rem; align-items: end; } }
-    .kicker { font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-soft); }
-    h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(2.6rem, 6vw, 3.8rem); line-height: .95; margin: .6rem 0 0; font-weight: 600; }
-    h1 em { display: block; font-style: italic; color: var(--gold-soft); font-weight: 500; }
-    .lead { max-width: 28rem; color: rgba(244,234,219,.8); line-height: 1.55; }
-    .cta { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.5rem; }
-    .cta .btn { padding: .7rem 1rem; font-size: .95rem; }
-    .cta .btn-cream { background: var(--cream); color: var(--ink); }
-    .cta .btn-line { background: transparent; color: var(--cream); border: 1px solid rgba(255,255,255,.2); }
-    .note { margin-top: 1rem; display: inline-flex; border: 1px solid rgba(224,192,120,.5); background: rgba(26,18,12,.5); color: var(--gold-soft); border-radius: 999px; padding: .4rem .9rem; font-size: .85rem; font-weight: 500; }
-    .hero-pie { border-radius: .8rem; overflow: hidden; border: 1px solid rgba(255,255,255,.1); }
-    .hero-pie img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .strip { background: var(--ink-2); color: var(--cream); }
-    .strip-inner { max-width: 72rem; margin: 0 auto; padding: 1.1rem 1rem; display: grid; gap: 1rem; }
-    @media (min-width: 700px) { .strip-inner { grid-template-columns: 1fr 1fr; } }
-    .muted { color: rgba(244,234,219,.7); font-size: .9rem; }
-    section.wrap { max-width: 72rem; margin: 0 auto; padding: 3.5rem 1rem; }
-    h2 { font-family: "Cormorant Garamond", serif; font-size: 2.2rem; margin: .4rem 0 0; font-weight: 600; }
-    .cards { display: grid; gap: 1rem; margin-top: 1.75rem; }
-    @media (min-width: 800px) { .cards { grid-template-columns: repeat(4, 1fr); } }
-    .card { background: var(--cream); border-radius: .8rem; overflow: hidden; outline: 1px solid var(--line); }
-    .card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
-    .card .pad { padding: 1rem; }
-    .card h3 { font-family: "Cormorant Garamond", serif; font-size: 1.45rem; margin: 0; }
-    .card p { margin: .4rem 0 0; color: var(--muted); font-size: .9rem; }
-    footer { background: var(--ink); color: var(--cream); margin-top: 2rem; }
-    .goldline { height: 6px; background: var(--gold); }
-    .foot { max-width: 72rem; margin: 0 auto; padding: 2.5rem 1rem; display: grid; gap: 2rem; }
-    @media (min-width: 800px) { .foot { grid-template-columns: 2fr 1fr; } }
-    .copy { font-size: 11px; color: rgba(244,234,219,.5); text-align: center; padding: 1rem; border-top: 1px solid rgba(255,255,255,.1); }
-    .banner { background: var(--tomato); color: var(--cream); font-size: .9rem; }
-    .banner-inner { max-width: 72rem; margin: 0 auto; padding: .65rem 1rem; }
-  </style>
+  <link rel="stylesheet" href="site.css" />
 </head>
-<body>
-  <div class="banner"><div class="banner-inner" data-i="hiringBanner"></div></div>
-  <header>
-    <div class="bar">
-      <a class="logo" href="./">
-        <img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/logo.jpg" alt="Failla's" />
-        <span>
-          <span class="brand">Failla's</span>
-          <span class="sub">Pizzeria & Ristorante</span>
-        </span>
-      </a>
-      <nav>
-        <a href="./" data-i="navHome"></a>
-        <a href="#menu" data-i="navMenu"></a>
-        <a href="#about" data-i="navAbout"></a>
-        <a href="#contact" data-i="navContact"></a>
-      </nav>
-      <div id="chip" class="chip" role="group" aria-label="Language"></div>
-    </div>
-    <div class="actions">
-      <div class="actions-inner">
-        <a class="btn btn-tomato" href="https://onlineordering.cmpmobile.com/menu/faillas_pizzeria" target="_blank" rel="noreferrer" data-i="orderOnline"></a>
-        <a class="btn btn-ghost" href="https://www.doordash.com/store/failla%E2%80%99s-pizzeria-&-ristorante-phoenixville-27685451" target="_blank" rel="noreferrer">DoorDash</a>
-        <a class="btn btn-ghost" href="https://www.ubereats.com/store/faillas-pizzeria-&-ristorante/oOpedRcJUCingV0Udi2bmw" target="_blank" rel="noreferrer">Uber Eats</a>
-      </div>
-    </div>
-  </header>
-  <section class="hero">
-    <img class="bg" src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/storefront-night.webp" alt="" />
-    <div class="shade"></div>
-    <div class="hero-inner">
-      <div>
-        <p class="kicker" data-i="homeKicker"></p>
-        <h1><span data-i="homeTitle1"></span><em>Grandma Pizza</em></h1>
-        <p class="lead" data-i="homeLead"></p>
-        <div class="cta">
-          <a class="btn btn-cream" href="tel:+16102552828"><span data-i="call"></span> 610-255-2828</a>
-          <a class="btn btn-line" href="#menu" data-i="viewMenu"></a>
+<body data-page="home">
+  <div id="site-chrome"></div>
+  <main id="content">
+    <section class="hero">
+      <img class="bg" src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/storefront-night.webp" alt="" />
+      <div class="shade"></div>
+      <div class="hero-inner">
+        <div>
+          <p class="kicker" data-i="homeKicker"></p>
+          <h1><span data-i="homeTitle1"></span><em>Grandma Pizza</em></h1>
+          <p class="lead" data-i="homeLead"></p>
+          <div class="cta">
+            <a class="btn btn-cream" href="tel:+16102552828"><span data-i="call"></span> 610-255-2828</a>
+            <a class="btn btn-line" href="menu.html" data-i="viewMenu"></a>
+          </div>
+          <p class="note" data-i="pickupFastest"></p>
         </div>
-        <p class="note" data-i="pickupFastest"></p>
+        <div class="hero-pie">
+          <img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/grandma-pie.webp" alt="Failla's Grandma pie" />
+        </div>
       </div>
-      <div class="hero-pie">
-        <img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/grandma-pie.webp" alt="Failla's Grandma pie" />
-      </div>
-    </div>
-  </section>
-  <div class="strip">
-    <div class="strip-inner">
-      <div>
-        <strong>2669 Charlestown Rd</strong>
-        <div class="muted">Phoenixville, PA 19460 · <span data-i="byobPatio"></span></div>
-      </div>
-      <div>
-        <strong data-i="dineTakeDeliver"></strong>
-        <div class="muted" data-i="cateringVanLine"></div>
-      </div>
-    </div>
-  </div>
-  <section class="wrap" id="menu">
-    <p class="kicker" style="color:var(--tomato)" data-i="regularsKicker"></p>
-    <h2 data-i="regularsTitle"></h2>
-    <div class="cards">
-      <article class="card"><img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/grandma-pie.webp" alt="" /><div class="pad"><h3 data-i="cardGrandma"></h3><p data-i="cardGrandmaText"></p></div></article>
-      <article class="card"><img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/failladelphia-stromboli.webp" alt="" /><div class="pad"><h3 data-i="cardFailla"></h3><p data-i="cardFaillaText"></p></div></article>
-      <article class="card"><img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/shrimp-pasta.webp" alt="" /><div class="pad"><h3 data-i="cardPasta"></h3><p data-i="cardPastaText"></p></div></article>
-      <article class="card"><img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/burrata-salad.webp" alt="" /><div class="pad"><h3 data-i="cardSalads"></h3><p data-i="cardSaladsText"></p></div></article>
-    </div>
-  </section>
-  <footer id="contact">
-    <div class="goldline"></div>
-    <div class="foot">
-      <div>
-        <div class="brand" style="font-size:2rem">Failla's</div>
-        <span class="sub">Pizzeria & Ristorante</span>
-        <p class="muted" style="margin-top:1rem;max-width:28rem" data-i="footerBlurb"></p>
-      </div>
-      <div>
-        <p class="kicker" data-i="visit"></p>
-        <p>2669 Charlestown Rd<br />Phoenixville, PA 19460</p>
-        <p><a href="tel:+16102552828">610-255-2828</a></p>
+    </section>
+    <div class="strip">
+      <div class="strip-inner">
+        <div>
+          <strong>2669 Charlestown Rd</strong>
+          <div class="cream-muted">Phoenixville, PA 19460 · <span data-i="byobPatio"></span></div>
+        </div>
+        <div>
+          <strong data-i="dineTakeDeliver"></strong>
+          <div class="cream-muted" data-i="cateringVanLine"></div>
+        </div>
       </div>
     </div>
-    <div class="copy">© 2026 Failla's Pizzeria & Ristorante · Phoenixville, PA · BYOB</div>
-  </footer>
-  <script>
-    const KEY = "faillas-lang";
-    const ORDER = ["en", "es", "pt"];
-    const NAME = { en: "English", es: "Español", pt: "Português" };
-    const FLAG = {
-      en: '<svg class="flag" viewBox="0 0 19 10"><rect width="19" height="10" fill="#bf0a30"/><rect y="1.1" width="19" height="1.1" fill="#fff"/><rect y="3.3" width="19" height="1.1" fill="#fff"/><rect y="5.5" width="19" height="1.1" fill="#fff"/><rect y="7.7" width="19" height="1.1" fill="#fff"/><rect width="7.6" height="5.4" fill="#002868"/></svg>',
-      es: '<svg class="flag" viewBox="0 0 9 6"><rect width="9" height="6" fill="#c60b1e"/><rect y="1.5" width="9" height="3" fill="#ffc400"/></svg>',
-      pt: '<svg class="flag" viewBox="0 0 20 14"><rect width="20" height="14" fill="#009b3a"/><polygon points="10,1.4 18.6,7 10,12.6 1.4,7" fill="#fedf00"/><circle cx="10" cy="7" r="2.5" fill="#002776"/></svg>'
-    };
-    const copy = {
-      en: { hiringBanner: "We're hiring — join the Failla's team.", navHome: "Home", navMenu: "Menu", navAbout: "About", navContact: "Contact", orderOnline: "Order Online", call: "Call", viewMenu: "View menu", homeKicker: "Phoenixville, Pennsylvania", homeTitle1: "Home of the", homeLead: "Family-owned Sicilian cooking — pan-baked pies, red-sauce classics, steaks, and salads. Walk in, call ahead, or order online.", pickupFastest: "Pickup orders are fastest by phone.", byobPatio: "BYOB · patio", dineTakeDeliver: "Dine-in, takeout, delivery", cateringVanLine: "Catering van, tent & food trailer", regularsKicker: "What people come back for", regularsTitle: "The regulars' order", cardGrandma: "Grandma Pie", cardGrandmaText: "Crisp pan, fresh mozzarella, sauce the owner still crushes by hand.", cardFailla: "Failladelphia", cardFaillaText: "Ribeye, Cooper Sharp, smoked mozzarella, sesame crust. Steak or stromboli.", cardPasta: "Pasta & Parm", cardPastaText: "Rosa shrimp, eggplant rollatini, chicken parm — the ristorante half of the sign.", cardSalads: "Salads", cardSaladsText: "Burrata, caprese, house Italian. Fresh, not an afterthought.", footerBlurb: "Family-owned. Sicilian recipes. Phoenixville's Grandma pie — plus pasta, steaks, salads, and catering that shows up.", visit: "Visit" },
-      es: { hiringBanner: "Estamos contratando — únete al equipo de Failla's.", navHome: "Inicio", navMenu: "Menú", navAbout: "Nosotros", navContact: "Contacto", orderOnline: "Pedir en línea", call: "Llamar", viewMenu: "Ver menú", homeKicker: "Phoenixville, Pennsylvania", homeTitle1: "Casa de la", homeLead: "Cocina siciliana de familia — pizzas al molde, clásicos de salsa roja, steaks y ensaladas. Entre, llame o pida en línea.", pickupFastest: "Para recoger, lo más rápido es llamar.", byobPatio: "BYOB · patio", dineTakeDeliver: "Comer aquí, para llevar, delivery", cateringVanLine: "Van de catering, carpa y food trailer", regularsKicker: "Por lo que vuelven", regularsTitle: "El pedido de siempre", cardGrandma: "Grandma Pie", cardGrandmaText: "Molde crocante, mozzarella fresca, salsa que el dueño todavía aplasta a mano.", cardFailla: "Failladelphia", cardFaillaText: "Ribeye, Cooper Sharp, mozzarella ahumada, masa con sésamo. Steak o stromboli.", cardPasta: "Pasta & Parm", cardPastaText: "Camarones Rosa, eggplant rollatini, chicken parm — la mitad ristorante del letrero.", cardSalads: "Ensaladas", cardSaladsText: "Burrata, caprese, italiana de la casa. Frescas, no de relleno.", footerBlurb: "De familia. Recetas sicilianas. El Grandma pie de Phoenixville — más pasta, steaks, ensaladas y catering que llega.", visit: "Visítanos" },
-      pt: { hiringBanner: "Estamos contratando — entre para o time da Failla's.", navHome: "Início", navMenu: "Cardápio", navAbout: "Sobre", navContact: "Contato", orderOnline: "Pedir online", call: "Ligar", viewMenu: "Ver cardápio", homeKicker: "Phoenixville, Pennsylvania", homeTitle1: "Casa da", homeLead: "Comida siciliana de família — pizzas na assadeira, clássicos de molho vermelho, steaks e saladas. Entre, ligue ou peça online.", pickupFastest: "Para retirar, o mais rápido é ligar.", byobPatio: "BYOB · pátio", dineTakeDeliver: "Salão, para viagem, delivery", cateringVanLine: "Van de catering, tenda e food trailer", regularsKicker: "O que faz o pessoal voltar", regularsTitle: "O pedido dos regulares", cardGrandma: "Grandma Pie", cardGrandmaText: "Assadeira crocante, mozzarella fresca, molho que o dono ainda amassa na mão.", cardFailla: "Failladelphia", cardFaillaText: "Ribeye, Cooper Sharp, mozzarella defumada, massa com gergelim. Steak ou stromboli.", cardPasta: "Pasta & Parm", cardPastaText: "Camarão Rosa, eggplant rollatini, chicken parm — o lado ristorante da placa.", cardSalads: "Saladas", cardSaladsText: "Burrata, caprese, italiana da casa. Frescas, não de encher linguiça.", footerBlurb: "De família. Receitas sicilianas. A Grandma pie de Phoenixville — mais massa, steaks, saladas e catering que aparece.", visit: "Visite" }
-    };
-    function readLang() {
-      try { const s = localStorage.getItem(KEY); if (s === "en" || s === "es" || s === "pt") return s; } catch (e) {}
-      return "en";
-    }
-    function saveLang(lang) {
-      try { localStorage.setItem(KEY, lang); } catch (e) {}
-      try { document.cookie = KEY + "=" + lang + ";path=/;max-age=31536000;samesite=lax"; } catch (e) {}
-    }
-    function apply(lang) {
-      const t = copy[lang];
-      document.documentElement.lang = lang === "pt" ? "pt-BR" : lang;
-      document.documentElement.setAttribute("data-lang", lang);
-      document.querySelectorAll("[data-i]").forEach((el) => {
-        const key = el.getAttribute("data-i");
-        if (t[key]) el.textContent = t[key];
-      });
-      const chip = document.getElementById("chip");
-      chip.innerHTML = "";
-      ORDER.filter((l) => l !== lang).forEach((option) => {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.setAttribute("aria-label", NAME[option]);
-        b.innerHTML = FLAG[option] + "<span>" + NAME[option] + "</span>";
-        b.addEventListener("click", () => { saveLang(option); apply(option); });
-        chip.appendChild(b);
-      });
-    }
-    apply(readLang());
-  </script>
+    <section class="wrap">
+      <p class="kicker tomato" data-i="regularsKicker"></p>
+      <h2 data-i="regularsTitle"></h2>
+      <div class="cards">
+        <article class="card"><img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/grandma-pie.webp" alt="" /><div class="pad"><h3 data-i="cardGrandma"></h3><p data-i="cardGrandmaText"></p></div></article>
+        <article class="card"><img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/failladelphia-stromboli.webp" alt="" /><div class="pad"><h3 data-i="cardFailla"></h3><p data-i="cardFaillaText"></p></div></article>
+        <article class="card"><img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/shrimp-pasta.webp" alt="" /><div class="pad"><h3 data-i="cardPasta"></h3><p data-i="cardPastaText"></p></div></article>
+        <article class="card"><img src="https://cdn.jsdelivr.net/gh/sysopx786/faillaspizza-Website@feat/trilingual-switcher/public/images/burrata-salad.webp" alt="" /><div class="pad"><h3 data-i="cardSalads"></h3><p data-i="cardSaladsText"></p></div></article>
+      </div>
+      <p style="margin-top:1.5rem"><a class="btn btn-ink" href="menu.html" data-i="fullMenu"></a></p>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="site.js"></script>
 </body>
 </html>
