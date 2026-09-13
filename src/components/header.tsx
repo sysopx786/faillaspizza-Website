@@ -1,14 +1,25 @@
 import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
-import { hiringOpen, nav, site } from "@/lib/site";
+import { hiringOpen, site } from "@/lib/site";
 import { Button } from "@/components/ui/button";
+import { LangChip } from "@/components/lang-switch";
+import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const links = hiringOpen ? [...nav, { to: "/jobs", label: "Jobs" }] : [...nav];
+  const { t } = useI18n();
+  const links = [
+    { to: "/", label: t.navHome },
+    { to: "/menu", label: t.navMenu },
+    { to: "/about", label: t.navAbout },
+    { to: "/catering", label: t.navCatering },
+    { to: "/gallery", label: t.navGallery },
+    { to: "/contact", label: t.navContact },
+    ...(hiringOpen ? [{ to: "/jobs", label: t.navJobs }] : []),
+  ];
 
   return (
     <header className="border-b border-white/10 bg-ink text-cream">
@@ -47,6 +58,7 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-2 lg:ml-4">
+          <LangChip full className="hidden sm:inline-flex" />
           <a href={site.phoneHref} className="hidden sm:block">
             <Button variant="ghost" size="sm" className="text-cream">
               <Phone />
@@ -56,7 +68,7 @@ export function Header() {
           <button
             type="button"
             className="inline-flex size-11 items-center justify-center rounded-md text-cream lg:hidden"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? t.closeMenu : t.openMenu}
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X className="size-6" /> : <Menu className="size-6" />}
@@ -68,7 +80,7 @@ export function Header() {
         <div className="mx-auto flex max-w-6xl items-center gap-1.5 px-4 py-2.5 sm:gap-2 sm:px-6">
           <a href={site.orderUrl} target="_blank" rel="noreferrer">
             <Button variant="tomato" size="sm">
-              Order Online
+              {t.orderOnline}
             </Button>
           </a>
           <a href={site.doorDashUrl} target="_blank" rel="noreferrer">
@@ -77,7 +89,7 @@ export function Header() {
               size="sm"
               className="border border-white/25 px-3 text-cream"
             >
-              DoorDash
+              {t.doorDash}
             </Button>
           </a>
           <a href={site.uberEatsUrl} target="_blank" rel="noreferrer">
@@ -86,13 +98,13 @@ export function Header() {
               size="sm"
               className="border border-white/25 px-3 text-cream"
             >
-              Uber Eats
+              {t.uberEats}
             </Button>
           </a>
           <a
             href={site.phoneHref}
-            aria-label={`Call ${site.phone} for pickup`}
-            title="Call for pickup"
+            aria-label={`${t.call} ${site.phone}`}
+            title={t.callForPickup}
             className="ml-auto inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-[#2ea44f] text-white hover:bg-[#249344]"
           >
             <Phone className="size-5" />
@@ -116,12 +128,10 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <a
-              href={site.phoneHref}
-              className="rounded-md px-3 py-3 text-base text-cream"
-            >
-              Call {site.phone}
+            <a href={site.phoneHref} className="rounded-md px-3 py-3 text-base text-cream">
+              {t.call} {site.phone}
             </a>
+            <LangChip full className="mt-3 h-12 w-full" />
           </nav>
         </div>
       ) : null}

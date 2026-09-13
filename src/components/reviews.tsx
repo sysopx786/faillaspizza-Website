@@ -2,6 +2,7 @@ import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { googleRating, reviews } from "@/data/reviews";
 import { site } from "@/lib/site";
+import { useI18n } from "@/lib/i18n";
 
 function Stars({ size = "size-4" }: { size?: string }) {
   return (
@@ -16,6 +17,7 @@ function Stars({ size = "size-4" }: { size?: string }) {
 const featured = reviews.find((item) => item.name === "S. Marles") ?? reviews[0];
 
 export function ReviewSummary() {
+  const { t } = useI18n();
   return (
     <div className="overflow-hidden rounded-xl bg-ink text-cream">
       <div className="px-5 py-8 sm:px-8 sm:py-10">
@@ -30,17 +32,16 @@ export function ReviewSummary() {
           <div className="mb-1">
             <Stars size="size-5" />
             <p className="mt-1 text-sm text-cream/70">
-              {googleRating.count} reviews
+              {googleRating.count} {t.reviewsWord}
             </p>
           </div>
         </div>
 
         <h2 className="mt-6 font-display text-3xl sm:text-4xl">
-          People keep coming back
+          {t.reviewsComeBack}
         </h2>
         <p className="mt-3 max-w-md text-cream/75">
-          Phoenixville’s Grandma pie — and a dining room that treats you like
-          family.
+          {t.reviewsLead}
         </p>
 
         <blockquote className="mt-6 max-w-lg border-l-2 border-gold-soft/60 pl-4">
@@ -60,7 +61,7 @@ export function ReviewSummary() {
             className="w-full sm:w-auto"
           >
             <Button variant="gold" className="w-full">
-              Write a Google review
+              {t.writeGoogle}
             </Button>
           </a>
           <a
@@ -70,7 +71,7 @@ export function ReviewSummary() {
             className="w-full sm:w-auto"
           >
             <Button variant="ghost" className="w-full border border-white/20">
-              Write on TripAdvisor
+              {t.writeTripAdvisor}
             </Button>
           </a>
         </div>

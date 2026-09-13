@@ -44,7 +44,7 @@ export const holidays: HolidayHours[] = [
   },
 ];
 
-const DAY_NAMES = [
+export const DAY_NAMES = [
   "Sunday",
   "Monday",
   "Tuesday",
@@ -53,6 +53,28 @@ const DAY_NAMES = [
   "Friday",
   "Saturday",
 ] as const;
+
+export type HoursLabels = {
+  dayNames: readonly [string, string, string, string, string, string, string];
+  closed: string;
+  openNow: string;
+  until: string;
+  opens: string;
+  tomorrow: string;
+  callForHours: string;
+  andJoin: string;
+};
+
+export const DEFAULT_HOURS_LABELS: HoursLabels = {
+  dayNames: DAY_NAMES,
+  closed: "Closed",
+  openNow: "Open now",
+  until: "until",
+  opens: "opens",
+  tomorrow: "tomorrow",
+  callForHours: "call for hours",
+  andJoin: " & ",
+};
 
 const WEEKDAY_INDEX: Record<string, number> = {
   Sun: 0,
@@ -145,8 +167,12 @@ function addEasternDays(parts: EasternParts, days: number): EasternParts {
   return easternParts(new Date(utc));
 }
 
-function rangeLabel(open: string | null, close: string | null) {
-  if (!open || !close) return "Closed";
+function rangeLabel(
+  open: string | null,
+  close: string | null,
+  closed = DEFAULT_HOURS_LABELS.closed,
+) {
+  if (!open || !close) return closed;
   return `${formatClock(open)} – ${formatClock(close)}`;
 }
 
@@ -163,10 +189,12 @@ export function getOpenStatus(
   at: Date = new Date(),
   holidayList: HolidayHours[] = holidays,
   weekly: DayHours[] = weeklyHours,
+  labels: HoursLabels = DEFAULT_HOURS_LABELS,
 ): OpenStatus {
   const now = easternParts(at);
   const today = lookupHours(dateKey(now), now.weekday, weekly, holidayList);
   const nowMin = now.hour * 60 + now.minute;
+  const days = labels.dayNames;
 
   const withHoliday = (status: OpenStatus): OpenStatus => ({
     ...status,
@@ -180,17 +208,17 @@ export function getOpenStatus(
     if (nowMin >= openMin && nowMin < closeMin) {
       return withHoliday({
         isOpen: true,
-        headline: "Open now",
-        detail: `until ${formatClock(today.close)}`,
-        todayLabel: rangeLabel(today.open, today.close),
+        headline: labels.openNow,
+        detail: `${labels.until} ${formatClock(today.close)}`,
+        todayLabel: rangeLabel(today.open, today.close, labels.closed),
       });
     }
     if (nowMin < openMin) {
       return withHoliday({
         isOpen: false,
-        headline: "Closed",
-        detail: `opens ${formatClock(today.open)}`,
-        todayLabel: rangeLabel(today.open, today.close),
+        headline: labels.closed,
+        detail: `${labels.opens} ${formatClock(today.open)}`,
+        todayLabel: rangeLabel(today.open, today.close, labels.closed),
       });
     }
   }
@@ -206,27 +234,28 @@ export function getOpenStatus(
     if (nextHours.open && nextHours.close) {
       const when =
         i === 1
-          ? `tomorrow ${formatClock(nextHours.open)}`
-          : `${DAY_NAMES[next.weekday]} ${formatClock(nextHours.open)}`;
+          ? `${labels.tomorrow} ${formatClock(nextHours.open)}`
+          : `${days[next.weekday]} ${formatClock(nextHours.open)}`;
       return withHoliday({
         isOpen: false,
-        headline: "Closed",
-        detail: `opens ${when}`,
-        todayLabel: rangeLabel(today.open, today.close),
+        headline: labels.closed,
+        detail: `${labels.opens} ${when}`,
+        todayLabel: rangeLabel(today.open, today.close, labels.closed),
       });
     }
   }
 
   return withHoliday({
     isOpen: false,
-    headline: "Closed",
-    detail: "call for hours",
-    todayLabel: rangeLabel(today.open, today.close),
+    headline: labels.closed,
+    detail: labels.callForHours,
+    todayLabel: rangeLabel(today.open, today.close, labels.closed),
   });
 }
 
 export function hoursDisplayRows(
   weekly: DayHours[] = weeklyHours,
+  labels: HoursLabels = DEFAULT_HOURS_LABELS,
 ): { days: string; time: string }[] {
   const order = [1, 2, 3, 4, 5, 6, 0];
   const rows: { days: string; time: string }[] = [];
@@ -241,18 +270,18 @@ export function hoursDisplayRows(
       if (next.open !== hours.open || next.close !== hours.close) break;
       j += 1;
     }
-    const startName = DAY_NAMES[start];
-    const endName = DAY_NAMES[order[j]];
+    const startName = labels.dayNames[start];
+    const endName = labels.dayNames[order[j]];
     const span = j - i;
     const days =
       span === 0
         ? startName
         : span === 1
-          ? `${startName} & ${endName}`
+          ? `${startName}${labels.andJoin}${endName}`
           : `${startName} – ${endName}`;
     rows.push({
       days,
-      time: rangeLabel(hours?.open ?? null, hours?.close ?? null),
+      time: rangeLabel(hours?.open ?? null, hours?.close ?? null, labels.closed),
     });
     i = j + 1;
   }
