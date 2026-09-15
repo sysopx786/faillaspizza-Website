@@ -1,5 +1,4 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
-import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteLayout } from "@/components/site-layout";
 import { site } from "@/lib/site";
@@ -34,11 +33,9 @@ export const Route = createRootRoute({
       </head>
       <body>
         <PreviewHostBridge />
-        <AuthProvider>
-          <SiteLayout>
-            <Outlet />
-          </SiteLayout>
-        </AuthProvider>
+        <SiteLayout>
+          <Outlet />
+        </SiteLayout>
         <Scripts />
       </body>
     </html>

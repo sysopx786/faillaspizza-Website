@@ -30,7 +30,7 @@ function GalleryPage() {
   }, [filter]);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <main className="mx-auto w-full min-w-0 max-w-6xl px-4 py-10 sm:px-6">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
         From the kitchen
       </p>
@@ -40,7 +40,8 @@ function GalleryPage() {
         the dining room, the van, the night sign.
       </p>
 
-      <div className="mt-8 flex gap-2 overflow-x-auto pb-2">
+      <div className="mt-8 w-full min-w-0 overflow-x-auto">
+        <div className="flex w-max gap-2 pb-2">
         {filters.map((f) => (
           <button
             key={f.id}
@@ -54,6 +55,7 @@ function GalleryPage() {
             {f.label}
           </button>
         ))}
+        </div>
       </div>
 
       <ul className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3">

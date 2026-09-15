@@ -12,7 +12,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         <HoursStatusBar />
         <Header />
       </div>
-      {children}
+      <div className="min-w-0 w-full">{children}</div>
       <Footer />
     </div>
   );
