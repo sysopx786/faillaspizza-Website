@@ -6,7 +6,8 @@ import { GoogleListingCard } from "@/components/google-listing";
 import { Input, Label, Textarea } from "@/components/ui/input";
 import { site } from "@/lib/site";
 import { formatClock, upcomingHolidays } from "@/lib/hours";
-import { useOpenStatus } from "@/components/hours-status";
+import { useOpenStatus, translateOpenStatus } from "@/components/hours-status";
+import { useI18n } from "@/lib/i18n-provider";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -22,18 +23,18 @@ function ContactPage() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const status = useOpenStatus();
+  const { t } = useI18n();
+  const openCopy = translateOpenStatus(status, t);
   const nextHolidays = upcomingHolidays();
 
   return (
     <main className="mx-auto grid max-w-6xl gap-12 px-4 py-12 sm:px-6 lg:grid-cols-2">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tomato">
-          Find us
+          {t.findUs}
         </p>
-        <h1 className="mt-2 font-display text-5xl">Contact</h1>
-        <p className="mt-3 text-muted">
-          Fastest: call. Walk-ins welcome — we don't take reservations.
-        </p>
+        <h1 className="mt-2 font-display text-5xl">{t.contactTitle}</h1>
+        <p className="mt-3 text-muted">{t.contactLead}</p>
 
         <ul className="mt-8 space-y-5 text-sm">
           <li className="flex gap-3">
@@ -42,7 +43,7 @@ function ContactPage() {
               <a href={site.phoneHref} className="text-lg font-medium hover:underline">
                 {site.phone}
               </a>
-              <p className="text-muted">Dine-in, takeout, catering</p>
+              <p className="text-muted">{t.dineTakeCater}</p>
             </div>
           </li>
           <li className="flex gap-3">
@@ -58,15 +59,15 @@ function ContactPage() {
                 <br />
                 {site.cityLine}
               </a>
-              <p className="text-muted">Corner of Charlestown & Coldstream</p>
+              <p className="text-muted">{t.cornerOf}</p>
             </div>
           </li>
           <li id="hours" className="flex scroll-mt-28 gap-3">
             <Clock className="mt-0.5 size-5 text-tomato" />
             <div>
               <p className="font-medium">
-                {status.headline}
-                <span className="font-normal text-muted"> · {status.detail}</span>
+                {openCopy.headline}
+                <span className="font-normal text-muted"> · {openCopy.detail}</span>
               </p>
               {status.holidayName ? (
                 <p className="text-tomato">
@@ -152,13 +153,14 @@ function ContactPage() {
               setSent(true);
             }}
           >
-            <h2 className="font-display text-3xl">Send a note</h2>
+            <h2 className="font-display text-3xl">{t.sendNote}</h2>
             <p className="text-sm text-muted">
+              {t.sendNoteLead}
               Catering, a question, a Friday Grandma pie for 20 — drop it here.
               Call if you need us the same hour.
             </p>
             <div className="space-y-1.5">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">{t.labelName}</Label>
               <Input
                 id="name"
                 required
@@ -168,7 +170,7 @@ function ContactPage() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="phone">Phone</Label>
+              <Label htmlFor="phone">{t.labelPhone}</Label>
               <Input
                 id="phone"
                 type="tel"
@@ -179,7 +181,7 @@ function ContactPage() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t.labelEmail}</Label>
               <Input
                 id="email"
                 type="email"
@@ -189,7 +191,7 @@ function ContactPage() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="message">Message</Label>
+              <Label htmlFor="message">{t.labelMessage}</Label>
               <Textarea
                 id="message"
                 required
@@ -198,7 +200,7 @@ function ContactPage() {
               />
             </div>
             <Button type="submit" className="w-full sm:w-auto">
-              Submit
+              {t.submit}
             </Button>
           </form>
         )}

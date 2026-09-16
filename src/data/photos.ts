@@ -1,7 +1,7 @@
 export type Photo = {
   src: string;
   alt: string;
-  category: "pizza" | "pasta" | "salad" | "plates" | "shop";
+  category: "pizza" | "pasta" | "salad" | "plates" | "shop" | "merch";
   kind?: "image" | "video";
   poster?: string;
 };
@@ -332,6 +332,41 @@ export const photos: Photo[] = [
     src: "/images/merch-counter.webp",
     alt: "Hats, shirts, and house seasoning at the counter",
     category: "shop",
+  },
+  {
+    src: "/images/merch-hoodie-black-front.jpg",
+    alt: "Black Failla's hoodie — script logo on the chest",
+    category: "merch",
+  },
+  {
+    src: "/images/merch-hoodie-white-front.jpg",
+    alt: "White Failla's hoodie — script logo on the chest",
+    category: "merch",
+  },
+  {
+    src: "/images/merch-tee-black-front.jpg",
+    alt: "Black Failla's tee — Italian and American flags on the sleeves",
+    category: "merch",
+  },
+  {
+    src: "/images/merch-hat-black.jpg",
+    alt: "Black Failla's cap with the embroidered chef logo",
+    category: "merch",
+  },
+  {
+    src: "/images/merch-hoodie-black-back.jpg",
+    alt: "Black Failla's hoodie — chef logo on the back",
+    category: "merch",
+  },
+  {
+    src: "/images/merch-hoodie-white-back.jpg",
+    alt: "White Failla's hoodie — chef logo on the back",
+    category: "merch",
+  },
+  {
+    src: "/images/merch-tee-black-back.jpg",
+    alt: "Black Failla's tee — chef logo on the back",
+    category: "merch",
   },
   {
     src: "/images/storefront-night.webp",

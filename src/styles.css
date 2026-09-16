@@ -72,6 +72,58 @@
   }
 }
 
+@keyframes flash-pickup {
+  0%,
+  100% {
+    opacity: 1;
+    color: #ffe9a8;
+    text-shadow: 0 0 6px rgb(255 210 90 / 0.55);
+  }
+  50% {
+    opacity: 1;
+    color: #fffdf4;
+    text-shadow:
+      0 0 10px rgb(255 230 140 / 1),
+      0 0 22px rgb(255 200 60 / 0.9);
+  }
+}
+
+@keyframes flash-open {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgb(46 164 79 / 0);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 16px 2px rgb(46 164 79 / 0.75);
+  }
+}
+
+@keyframes flash-closed {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgb(180 35 44 / 0);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 14px 1px rgb(180 35 44 / 0.65);
+  }
+}
+
+.flash-pickup {
+  animation: flash-pickup 1.05s ease-in-out infinite;
+}
+
+.flash-open {
+  animation: flash-open 1.7s ease-in-out infinite;
+}
+
+.flash-closed {
+  animation: flash-closed 1.35s steps(2, end) infinite;
+}
+
 .checker {
   background-image: linear-gradient(45deg, #1a120c 25%, transparent 25%),
     linear-gradient(-45deg, #1a120c 25%, transparent 25%),

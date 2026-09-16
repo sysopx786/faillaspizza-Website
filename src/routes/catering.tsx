@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Phone, Tent, Truck, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { site } from "@/lib/site";
+import { useI18n } from "@/lib/i18n-provider";
 
 export const Route = createFileRoute("/catering")({
   component: CateringPage,
@@ -11,20 +12,17 @@ export const Route = createFileRoute("/catering")({
 });
 
 function CateringPage() {
+  const { t } = useI18n();
   return (
     <main>
       <section className="bg-ink text-cream">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">
-              Parties · Schools · Offices
+              {t.catCateringKicker}
             </p>
-            <h1 className="mt-3 font-display text-5xl">Catering, tent & trailer</h1>
-            <p className="mt-4 max-w-lg text-cream/75">
-              Grandma pies by the box, trays of pasta, and a crew that already
-              does school dinners and weekend events. Call the shop — we'll
-              size it.
-            </p>
+            <h1 className="mt-3 font-display text-5xl">{t.catTitle}</h1>
+            <p className="mt-4 max-w-lg text-cream/75">{t.catLead}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href={site.phoneHref}>
                 <Button size="lg">
@@ -33,7 +31,7 @@ function CateringPage() {
               </a>
               <Link to="/contact">
                 <Button size="lg" variant="invert">
-                  Send a note
+                  {t.sendNote}
                 </Button>
               </Link>
             </div>
@@ -50,13 +48,13 @@ function CateringPage() {
         {[
           {
             icon: Truck,
-            title: "Delivery van",
-            text: "Hot food to the house, office, or field. Same kitchen, same Grandma pie.",
+            title: t.vanTitle,
+            text: t.vanText,
           },
           {
             icon: Tent,
-            title: "Vendor tent",
-            text: "We set up at town events and private parties. Portable ovens and a generator if you need us on-site.",
+            title: t.tentTitle,
+            text: t.tentText,
             image: {
               src: "/images/vendor-tent.webp",
               alt: "Failla's vendor tent — Home of the Grandma Pizza, set up for an event",
@@ -64,8 +62,8 @@ function CateringPage() {
           },
           {
             icon: Utensils,
-            title: "Food trailer",
-            text: "Full kitchen and pizza ovens on wheels — for bigger parties and festivals.",
+            title: t.trailerTitle,
+            text: t.trailerText,
           },
         ].map((item) => (
           <article

@@ -157,6 +157,10 @@ export type OpenStatus = {
   todayLabel: string;
   holidayName?: string;
   holidayNote?: string;
+  untilClock?: string;
+  opensClock?: string;
+  opensWhen?: "today" | "tomorrow" | "weekday";
+  opensWeekday?: number;
 };
 
 export function getOpenStatus(
@@ -183,6 +187,7 @@ export function getOpenStatus(
         headline: "Open now",
         detail: `until ${formatClock(today.close)}`,
         todayLabel: rangeLabel(today.open, today.close),
+        untilClock: formatClock(today.close),
       });
     }
     if (nowMin < openMin) {
@@ -191,6 +196,8 @@ export function getOpenStatus(
         headline: "Closed",
         detail: `opens ${formatClock(today.open)}`,
         todayLabel: rangeLabel(today.open, today.close),
+        opensClock: formatClock(today.open),
+        opensWhen: "today",
       });
     }
   }
@@ -213,6 +220,9 @@ export function getOpenStatus(
         headline: "Closed",
         detail: `opens ${when}`,
         todayLabel: rangeLabel(today.open, today.close),
+        opensClock: formatClock(nextHours.open),
+        opensWhen: i === 1 ? "tomorrow" : "weekday",
+        opensWeekday: next.weekday,
       });
     }
   }

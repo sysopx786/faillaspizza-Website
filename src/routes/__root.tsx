@@ -1,6 +1,7 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteLayout } from "@/components/site-layout";
+import { I18nProvider, useI18n } from "@/lib/i18n-provider";
 import { site } from "@/lib/site";
 import appCss from "../styles.css?url";
 
@@ -26,8 +27,21 @@ export const Route = createRootRoute({
       },
     ],
   }),
-  component: () => (
-    <html lang="en" className="antialiased" suppressHydrationWarning>
+  component: Root,
+});
+
+function Root() {
+  return (
+    <I18nProvider>
+      <Document />
+    </I18nProvider>
+  );
+}
+
+function Document() {
+  const { lang } = useI18n();
+  return (
+    <html lang={lang} className="antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
@@ -39,5 +53,5 @@ export const Route = createRootRoute({
         <Scripts />
       </body>
     </html>
-  ),
-});
+  );
+}

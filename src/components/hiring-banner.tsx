@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { hiringOpen } from "@/lib/site";
+import { useI18n } from "@/lib/i18n-provider";
 
 export function HiringBanner() {
   const [hidden, setHidden] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     if (sessionStorage.getItem("faillas-hiring-dismissed") === "1") {
@@ -16,11 +18,11 @@ export function HiringBanner() {
 
   return (
     <div className="bg-tomato text-cream">
-      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-2.5 text-sm sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center gap-3 px-3 py-1.5 text-sm sm:px-6 sm:py-2">
         <p className="flex-1 text-pretty">
-          We're hiring — join the Failla's team.{" "}
+          {t.hiringBanner}{" "}
           <Link to="/jobs" className="font-semibold underline underline-offset-2">
-            See open roles
+            {t.hiringCta}
           </Link>
         </p>
         <button

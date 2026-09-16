@@ -17,6 +17,7 @@ const buttonVariants = cva(
         invert: "bg-cream text-ink hover:bg-paper",
       },
       size: {
+        xs: "h-8 rounded-md px-2.5 text-xs",
         sm: "h-10 rounded-md px-3.5 text-sm",
         md: "h-11 rounded-md px-5 text-sm",
         lg: "h-12 rounded-lg px-6 text-[0.9375rem]",

@@ -3,10 +3,24 @@ import { MapPin, Phone } from "lucide-react";
 import { hiringOpen, nav, site } from "@/lib/site";
 import { formatClock, upcomingHolidays } from "@/lib/hours";
 import { SocialLinks } from "@/components/social-links";
+import { useI18n } from "@/lib/i18n-provider";
 
 export function Footer() {
+  const { t } = useI18n();
   const links = hiringOpen ? [...nav, { to: "/jobs", label: "Jobs" }] : [...nav];
   const nextHolidays = upcomingHolidays();
+  const daySwap = [
+    ["Sunday", t.sunday],
+    ["Monday", t.monday],
+    ["Tuesday", t.tuesday],
+    ["Wednesday", t.wednesday],
+    ["Thursday", t.thursday],
+    ["Friday", t.friday],
+    ["Saturday", t.saturday],
+    ["Closed", t.closed],
+  ] as const;
+  const trDays = (value: string) =>
+    daySwap.reduce((acc, [en, local]) => acc.replaceAll(en, local), value);
 
   return (
     <footer className="mt-auto bg-ink text-cream">
@@ -18,8 +32,7 @@ export function Footer() {
             Pizzeria & Ristorante
           </p>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-cream/75">
-            Family-owned. Sicilian recipes. Phoenixville's Grandma pie —
-            plus pasta, steaks, salads, and catering that shows up.
+            {t.footerBlurb}
           </p>
           <div className="mt-6">
             <SocialLinks />
@@ -27,7 +40,7 @@ export function Footer() {
         </div>
         <div id="hours" className="scroll-mt-36">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold-soft">
-            Visit
+            {t.visit}
           </p>
           <address className="mt-3 not-italic text-sm leading-relaxed text-cream/80">
             <a
@@ -57,7 +70,7 @@ export function Footer() {
             rel="noreferrer"
             className="mt-3 inline-block text-sm text-gold-soft hover:text-gold"
           >
-            Hours, popular times & reviews on Google
+            {t.googleHoursReviews}
           </a>
           <a
             href={site.tripAdvisorUrl}
@@ -65,13 +78,21 @@ export function Footer() {
             rel="noreferrer"
             className="mt-1.5 block text-sm text-gold-soft hover:text-gold"
           >
-            Reviews on TripAdvisor
+            {t.reviewsOnTA}
+          </a>
+          <a
+            href={site.yelpUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-1.5 block text-sm text-gold-soft hover:text-gold"
+          >
+            Yelp
           </a>
           <ul className="mt-4 space-y-1 text-sm text-cream/70">
             {site.hours.map((row) => (
               <li key={row.days}>
-                <span className="text-cream/90">{row.days}</span>
-                <span className="block">{row.time}</span>
+                <span className="text-cream/90">{trDays(row.days)}</span>
+                <span className="block">{trDays(row.time)}</span>
               </li>
             ))}
           </ul>
@@ -93,13 +114,25 @@ export function Footer() {
         </div>
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold-soft">
-            Explore
+            {t.explore}
           </p>
           <ul className="mt-3 space-y-2 text-sm">
             {links.map((item) => (
               <li key={item.to}>
                 <Link to={item.to} className="text-cream/80 hover:text-cream">
-                  {item.label}
+                  {
+                    (
+                      {
+                        "/": t.navHome,
+                        "/menu": t.navMenu,
+                        "/about": t.navAbout,
+                        "/catering": t.navCatering,
+                        "/gallery": t.navGallery,
+                        "/contact": t.navContact,
+                        "/jobs": t.navJobs,
+                      } as Record<string, string>
+                    )[item.to]
+                  }
                 </Link>
               </li>
             ))}
@@ -110,7 +143,7 @@ export function Footer() {
                 rel="noreferrer"
                 className="text-cream/80 hover:text-cream"
               >
-                Order Online
+                {t.orderOnline}
               </a>
             </li>
             <li>

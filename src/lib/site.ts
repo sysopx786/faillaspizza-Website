@@ -36,8 +36,11 @@ export const site = {
     "https://www.tripadvisor.com/Restaurant_Review-g53437-d26949019-Reviews-Failla_s_Pizzeria_Restaurant-Phoenixville_Pennsylvania.html",
   tripAdvisorReviewUrl:
     "https://www.tripadvisor.com/UserReviewEdit-g53437-d26949019-Failla_s_Pizzeria_Restaurant-Phoenixville_Pennsylvania.html",
+  yelpUrl: "https://yelp.to/SheQ5lGLMt",
   menuPdf:
     "https://onlineorderingmadeeasy.com/wp-content/uploads/2025/08/Faillas-Menu-2025.07.pdf",
+  featuredBlogUrl:
+    "https://www.fordofphoenixville.com/blog/best-italian-restaurants-in-phoenixville-pa",
   hours: hoursDisplayRows(),
   notes: [
     "Dine-in, takeout, and delivery",

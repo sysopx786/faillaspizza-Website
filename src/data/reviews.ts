@@ -1,12 +1,13 @@
 export const googleRating = {
   score: "4.7",
-  count: 286,
+  count: 291,
+  fill: 4.7,
   bars: [
-    { stars: 5, pct: 92 },
-    { stars: 4, pct: 16 },
-    { stars: 3, pct: 5 },
+    { stars: 5, pct: 88 },
+    { stars: 4, pct: 12 },
+    { stars: 3, pct: 4 },
     { stars: 2, pct: 2 },
-    { stars: 1, pct: 4 },
+    { stars: 1, pct: 2 },
   ],
 } as const;
 
