@@ -279,15 +279,11 @@ export function baselinePlan(raw: CateringInput): CateringPlan {
 export function formatPlanMessage(
   input: CateringInput,
   plan: CateringPlan,
-  extras?: { extraNotes?: string; changes?: string[]; source?: "ai" | "menu" },
+  extras?: { extraNotes?: string; changes?: string[] },
 ) {
   const lines = [
-    extras?.source === "ai"
-      ? "Drafted by Failla's catering planner (AI). Customer may have edited this list. Not a quote."
-      : extras?.source === "menu"
-        ? "Starting list from Failla's menu math. Customer may have edited this list. Not a quote."
-        : "Catering planner request",
-    `Catering planner request`,
+    "Starting list from Failla's menu. Customer may have edited this list. Not a quote.",
+    "Catering planner request",
     input.date ? `Date: ${input.date}` : "Date: (not set)",
     `Event: ${input.event}`,
     `Headcount: ${input.people} (${input.kids} kids)`,

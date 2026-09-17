@@ -224,11 +224,11 @@ const en = {
   prevPhoto: "Previous",
   closeLightbox: "Close",
   plannerKicker: "Parties · Offices · Schools",
-  plannerTitle: "AI powered catering planner",
+  plannerTitle: "Catering planner",
   plannerLead:
-    "Tell us the crowd. An AI drafts a starting list from our menu — pies, trays, van or pickup. You edit it. The shop confirms the quote.",
-  planCta: "Plan this party with AI",
-  plannerHeroCta: "AI powered catering planner",
+    "Tell us the crowd. We'll size pies, trays, and whether to pick up or send the van from our menu. You edit it. The shop confirms the quote.",
+  planCta: "Plan this party",
+  plannerHeroCta: "Plan this party",
   planning: "Counting pies…",
   sendPlan: "Send this plan to Failla's",
   notAQuote:
@@ -475,11 +475,11 @@ const es: Copy = {
   prevPhoto: "Anterior",
   closeLightbox: "Cerrar",
   plannerKicker: "Fiestas · Oficinas · Escuelas",
-  plannerTitle: "Planificador de catering con IA",
+  plannerTitle: "Planificador de catering",
   plannerLead:
-    "Dinos cuánta gente. Una IA arma una lista de partida con nuestro menú — pizzas, bandejas, van o recoger. Tú la editas. El local confirma el precio.",
-  planCta: "Arma esta fiesta con IA",
-  plannerHeroCta: "Planificador de catering con IA",
+    "Dinos cuánta gente. Armamos pizzas, bandejas y si recoger o mandar la van con nuestro menú. Tú la editas. El local confirma el precio.",
+  planCta: "Armar este pedido",
+  plannerHeroCta: "Armar este pedido",
   planning: "Contando pizzas…",
   sendPlan: "Enviar este plan a Failla's",
   notAQuote:
@@ -725,11 +725,11 @@ const pt: Copy = {
   prevPhoto: "Anterior",
   closeLightbox: "Fechar",
   plannerKicker: "Festas · Escritórios · Escolas",
-  plannerTitle: "Planejador de catering com IA",
+  plannerTitle: "Planejador de catering",
   plannerLead:
-    "Diga o tamanho da turma. Uma IA monta uma lista inicial com o nosso cardápio — pizzas, bandejas, van ou retirada. Você edita. A loja confirma o preço.",
-  planCta: "Monte esta festa com IA",
-  plannerHeroCta: "Planejador de catering com IA",
+    "Diga o tamanho da turma. Montamos pizzas, bandejas e se é para retirar ou mandar a van com o cardápio. Você edita. A loja confirma o preço.",
+  planCta: "Montar este pedido",
+  plannerHeroCta: "Montar este pedido",
   planning: "Contando pizzas…",
   sendPlan: "Enviar este plano para a Failla's",
   notAQuote:
@@ -977,11 +977,11 @@ const it: Copy = {
   prevPhoto: "Indietro",
   closeLightbox: "Chiudi",
   plannerKicker: "Feste · Uffici · Scuole",
-  plannerTitle: "Pianificatore catering con IA",
+  plannerTitle: "Pianificatore catering",
   plannerLead:
-    "Dicci quanta gente. Un'IA prepara una lista di partenza dal nostro menu — pizze, teglie, furgone o ritiro. Tu la modifichi. Il locale conferma il preventivo.",
-  planCta: "Prepara questa festa con l'IA",
-  plannerHeroCta: "Pianificatore catering con IA",
+    "Dicci quanta gente. Dimensioniamo pizze, teglie e se ritirare o mandare il furgone dal menu. Tu la modifichi. Il locale conferma il preventivo.",
+  planCta: "Prepara questo ordine",
+  plannerHeroCta: "Prepara questo ordine",
   planning: "Contando le pizze…",
   sendPlan: "Invia questo piano a Failla's",
   notAQuote:
