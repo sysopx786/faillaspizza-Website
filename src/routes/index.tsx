@@ -26,14 +26,32 @@ function Home() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold-soft">
               {t.homeKicker}
             </p>
-            <a
-              href={site.featuredBlogUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2 inline-block text-sm font-medium text-gold-soft underline decoration-gold-soft/50 underline-offset-4 hover:text-cream"
-            >
-              {t.featuredItalian}
-            </a>
+            <div className="mt-2 flex flex-col gap-1">
+              <a
+                href={site.featuredBlogUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block text-sm font-medium text-gold-soft underline decoration-gold-soft/50 underline-offset-4 hover:text-cream"
+              >
+                {t.featuredItalian}
+              </a>
+              <a
+                href={site.featuredPizzaUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block text-sm font-medium text-gold-soft underline decoration-gold-soft/50 underline-offset-4 hover:text-cream"
+              >
+                {t.featuredPizza}
+              </a>
+              <a
+                href={site.featuredGrandmaUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block text-sm font-medium text-gold-soft underline decoration-gold-soft/50 underline-offset-4 hover:text-cream"
+              >
+                {t.featuredGrandma}
+              </a>
+            </div>
             <h1 className="mt-3 font-display text-5xl leading-[0.95] text-cream sm:text-6xl">
               {t.homeTitle1}
               <span className="block italic text-gold-soft">{t.grandmaPizza}</span>

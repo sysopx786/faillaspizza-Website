@@ -41,6 +41,8 @@ export const site = {
     "https://onlineorderingmadeeasy.com/wp-content/uploads/2025/08/Faillas-Menu-2025.07.pdf",
   featuredBlogUrl:
     "https://www.fordofphoenixville.com/blog/best-italian-restaurants-in-phoenixville-pa",
+  featuredPizzaUrl: "https://www.restaurantji.com/pa/phoenixville/pizza/",
+  featuredGrandmaUrl: "https://phoenixville.com/grandma-pizza-faillas/",
   hours: hoursDisplayRows(),
   notes: [
     "Dine-in, takeout, and delivery",
