@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/jobs",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Jobs · Failla's Pizzeria & Ristorante",
+      "hasCanvas": false,
+      "bodyTextLen": 969,
+      "bodyTextHash": "e117188b9b05ab82591376e7b7df7884408358da6e21d8e31bc64e8aa4cfa047",
+      "bodyTextPrefix": "We're hiring — join the Failla's team. See open roles Open now ·",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/qa-jobs.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Jobs · Failla's Pizzeria & Ristorante",
+      "hasCanvas": false,
+      "bodyTextLen": 910,
+      "bodyTextHash": "c53b3bdb4cd56d19989b31e9d9cd1e567461db550a8d99525a5a7b9002f3405e",
+      "bodyTextPrefix": "We're hiring — join the Failla's team. See open roles Open now ·",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/qa-jobs-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/qa-jobs.json"
+}

@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/about",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "About · Failla's Pizzeria & Ristorante",
+      "hasCanvas": false,
+      "bodyTextLen": 1950,
+      "bodyTextHash": "5fa628e389ecbc354cae133fb19454652b5782c02f07db85f65263f83dca1945",
+      "bodyTextPrefix": "We're hiring — join the Failla's team. See open roles Open now ·",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/qa-about.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "About · Failla's Pizzeria & Ristorante",
+      "hasCanvas": false,
+      "bodyTextLen": 1891,
+      "bodyTextHash": "c5ac823c93af1fc5b726b063afad3143e0f84f63af5ff4629c1ee71032b02de7",
+      "bodyTextPrefix": "We're hiring — join the Failla's team. See open roles Open now ·",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/qa-about-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/qa-about.json"
+}

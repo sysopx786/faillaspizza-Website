@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/catering",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Catering · Failla's Pizzeria & Ristorante",
+      "hasCanvas": false,
+      "bodyTextLen": 1641,
+      "bodyTextHash": "affbd830b8d7af560cbe8da7288067575661f7c4b1ed5cec89330c831def869d",
+      "bodyTextPrefix": "We're hiring — join the Failla's team. See open roles Open now ·",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/qa-catering.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Catering · Failla's Pizzeria & Ristorante",
+      "hasCanvas": false,
+      "bodyTextLen": 1582,
+      "bodyTextHash": "b49a704690b04e7cef961a0d0734f873590d92ca4d6d32cd2fb1227eafe8e0b5",
+      "bodyTextPrefix": "We're hiring — join the Failla's team. See open roles Open now ·",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/qa-catering-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/qa-catering.json"
+}
