@@ -147,6 +147,7 @@ const en = {
   menuDisclaimer:
     "Prices from our July 2025 dine-in menu and may change. Download the PDF or order online for the latest. All cash purchases receive a 3.99% discount.",
   allCategories: "All",
+  favorite: "Favorite",
   catCateringKicker: "Parties · Schools · Offices",
   catTitle: "Catering, tent & trailer",
   catLead:
@@ -272,6 +273,14 @@ const en = {
   aiBadge: "Made by AI",
   aiDisclosure:
     "This order was made by AI using Failla's menu. It is a draft, not a quote from the kitchen. Change the counts, drop anything you don't want, then send it — the shop confirms price and timing.",
+  aiWorkingBadge: "AI working",
+  aiWorkingTitle: "AI is writing this order",
+  aiWorkingLead:
+    "Here's a first count from the menu so you can see it's working. The AI is adding the shop wording — usually a few seconds.",
+  plannerStepCrowd: "Sizing the crowd…",
+  plannerStepPies: "Counting Grandma pies…",
+  plannerStepTrays: "Adding trays and salad…",
+  plannerStepVoice: "Writing the shop note…",
 };
 
 const es: Copy = {
@@ -391,6 +400,7 @@ const es: Copy = {
   menuDisclaimer:
     "Precios del menú de salón de julio 2025 y pueden cambiar. Baja el PDF o pide en línea para lo actual. Todas las compras en efectivo reciben 3.99% de descuento.",
   allCategories: "Todo",
+  favorite: "Favorito",
   catCateringKicker: "Fiestas · Escuelas · Oficinas",
   catTitle: "Catering, carpa y trailer",
   catLead:
@@ -514,6 +524,14 @@ const es: Copy = {
   aiBadge: "Hecho con IA",
   aiDisclosure:
     "Este pedido lo armó una IA con el menú de Failla's. Es un borrador, no un presupuesto de la cocina. Cambia cantidades, quita lo que no quieras y envíalo — el local confirma precio y horario.",
+  aiWorkingBadge: "IA trabajando",
+  aiWorkingTitle: "La IA está escribiendo este pedido",
+  aiWorkingLead:
+    "Aquí va un primer recuento del menú para que veas que funciona. La IA está añadiendo el texto del local — suelen ser unos segundos.",
+  plannerStepCrowd: "Calculando la gente…",
+  plannerStepPies: "Contando Grandma pies…",
+  plannerStepTrays: "Añadiendo bandejas y ensalada…",
+  plannerStepVoice: "Escribiendo la nota del local…",
 };
 
 const pt: Copy = {
@@ -632,6 +650,7 @@ const pt: Copy = {
   menuDisclaimer:
     "Preços do cardápio de salão de julho 2025 e podem mudar. Baixe o PDF ou peça online para o atual. Compras em dinheiro ganham 3.99% de desconto.",
   allCategories: "Tudo",
+  favorite: "Favorito",
   catCateringKicker: "Festas · Escolas · Escritórios",
   catTitle: "Catering, tenda e trailer",
   catLead:
@@ -755,6 +774,14 @@ const pt: Copy = {
   aiBadge: "Feito por IA",
   aiDisclosure:
     "Este pedido foi montado por IA com o cardápio da Failla's. É um rascunho, não um orçamento da cozinha. Mude as quantidades, tire o que não quiser e envie — a loja confirma preço e horário.",
+  aiWorkingBadge: "IA trabalhando",
+  aiWorkingTitle: "A IA está escrevendo este pedido",
+  aiWorkingLead:
+    "Aqui vai a primeira conta do cardápio para você ver que está funcionando. A IA está escrevendo o texto da loja — costuma ser alguns segundos.",
+  plannerStepCrowd: "Medindo a turma…",
+  plannerStepPies: "Contando Grandma pies…",
+  plannerStepTrays: "Adicionando bandejas e salada…",
+  plannerStepVoice: "Escrevendo o recado da loja…",
 };
 
 const it: Copy = {
@@ -874,6 +901,7 @@ const it: Copy = {
   menuDisclaimer:
     "Prezzi dal menu di sala di luglio 2025 e possono cambiare. Scarica il PDF o ordina online per l'aggiornato. Tutti gli acquisti in contanti hanno il 3.99% di sconto.",
   allCategories: "Tutto",
+  favorite: "Preferito",
   catCateringKicker: "Feste · Scuole · Uffici",
   catTitle: "Catering, tenda e trailer",
   catLead:
@@ -998,6 +1026,14 @@ const it: Copy = {
   aiBadge: "Creato dall'IA",
   aiDisclosure:
     "Questo ordine l'ha creato un'IA dal menu di Failla's. È una bozza, non un preventivo della cucina. Cambia le quantità, togli ciò che non vuoi e invia — il locale conferma prezzo e orari.",
+  aiWorkingBadge: "IA al lavoro",
+  aiWorkingTitle: "L'IA sta scrivendo questo ordine",
+  aiWorkingLead:
+    "Ecco un primo conteggio dal menu così vedi che sta lavorando. L'IA sta aggiungendo il testo del locale — di solito pochi secondi.",
+  plannerStepCrowd: "Contando le persone…",
+  plannerStepPies: "Contando le Grandma pie…",
+  plannerStepTrays: "Aggiungendo teglie e insalata…",
+  plannerStepVoice: "Scrivendo la nota del locale…",
 };
 
 export const copy: Record<Lang, Copy> = { en, es, pt, it };

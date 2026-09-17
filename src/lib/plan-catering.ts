@@ -1,7 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import {
   baselinePlan,
-  CATERING_CATALOG,
   normalizeInput,
   type CateringInput,
   type CateringPlan,
@@ -67,80 +66,61 @@ async function askGrok(input: CateringInput, baseline: CateringPlan) {
           : "English";
 
   const payload = {
-    model: "grok-4.5",
-    temperature: 0.3,
-    max_tokens: 700,
+    model: "grok-4.20-0309-non-reasoning",
+    temperature: 0.2,
+    max_tokens: 400,
     response_format: { type: "json_object" },
     messages: [
       {
         role: "system",
         content:
-          "You are the catering desk at Failla's Pizzeria & Ristorante in Phoenixville, PA. Write like the shop: warm, short, no hype. Only use items from the catalog. Never invent dishes or exact tray prices. Return JSON only.",
+          "Failla's Pizzeria catering desk, Phoenixville PA. Warm, short. JSON only. Do not invent dishes or tray prices.",
       },
       {
         role: "user",
-        content: `Write a catering starting list in ${langName}.
-
-Party:
-- people: ${input.people}
-- kids: ${input.kids}
-- date: ${input.date || "not set"}
-- event: ${input.event}
-- budget band: ${input.budget} (value=pizza-heavy, mid=pies+pasta, high=add parm/dessert, open=best spread)
-- preferred service: ${input.service}
-- notes: ${input.notes || "none"}
-
-Menu catalog:
-${CATERING_CATALOG}
-
-Our kitchen math (adjust, don't throw away):
-${JSON.stringify(baseline)}
-
-Return JSON:
-{
-  "headline": string,
-  "voice": string (2-3 sentences),
-  "service": "pickup" | "van" | "tent" | "trailer",
-  "serviceWhy": string,
-  "items": [{ "name": string, "qty": string, "note": string }],
-  "estimateLow": number,
-  "estimateHigh": number,
-  "estimateNote": string
-}
-
-Rules: Grandma Pie for 8+ people unless they refuse pizza. Keep item names recognizable from the catalog. Estimate is a range, labeled as not a quote. If notes mention vegetarian, include Veggie pizza or Eggplant Parm. If notes mention kids only, skip spicy pies.`,
+        content: `Catering list in ${langName}.
+Party: ${input.people} people, ${input.kids} kids, date ${input.date || "unset"}, event ${input.event}, budget ${input.budget}, service ${input.service}, notes: ${input.notes || "none"}.
+Allowed: Grandma Pie $25, Large cheese $17, Meat Lovers/Veggie/Buffalo Chicken large $23.50, Margherita large $19.50, Failladelphia Stromboli $26, wings 24/$30 or 50/$57.50, chicken fingers, Baked Ziti/Lasagna/Chicken Parm/Eggplant Parm trays (shop quotes), Caesar/Tossed trays, garlic knots, 2-liter soda, cannoli. Van, tent, trailer, pickup. BYOB.
+Kitchen math (adjust, keep): ${JSON.stringify(baseline)}
+JSON keys: headline, voice (2 sentences), service (pickup|van|tent|trailer), serviceWhy, items[{name,qty,note}], estimateLow, estimateHigh, estimateNote (say not a quote).
+Grandma Pie if 8+ people. Vegetarian notes → Veggie or Eggplant Parm.`,
       },
     ],
   };
 
-  const call = async () =>
-    fetch("https://api.x.ai/v1/chat/completions", {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 12000);
+  try {
+    const res = await fetch("https://api.x.ai/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify(payload),
+      signal: controller.signal,
     });
+    if (!res.ok) return null;
 
-  let res = await call();
-  if (!res.ok) res = await call();
-  if (!res.ok) return null;
-
-  const body = (await res.json()) as {
-    choices?: { message?: { content?: string } }[];
-  };
-  const text = body.choices?.[0]?.message?.content ?? "";
-  try {
-    return JSON.parse(text) as unknown;
-  } catch {
-    const match = text.match(/\{[\s\S]*\}/);
-    if (!match) return null;
+    const body = (await res.json()) as {
+      choices?: { message?: { content?: string } }[];
+    };
+    const text = body.choices?.[0]?.message?.content ?? "";
     try {
-      return JSON.parse(match[0]) as unknown;
+      return JSON.parse(text) as unknown;
     } catch {
-      return null;
+      const match = text.match(/\{[\s\S]*\}/);
+      if (!match) return null;
+      try {
+        return JSON.parse(match[0]) as unknown;
+      } catch {
+        return null;
+      }
     }
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
   }
 }
 

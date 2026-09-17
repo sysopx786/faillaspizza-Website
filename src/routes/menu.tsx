@@ -2,7 +2,7 @@ import { useMemo, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { categories } from "@/data/menu";
+import { localizedMenu, translateTag } from "@/lib/menu-i18n";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n-provider";
@@ -16,10 +16,11 @@ export const Route = createFileRoute("/menu")({
 
 function MenuPage() {
   const [active, setActive] = useState("all");
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const menu = useMemo(() => localizedMenu(lang), [lang]);
   const visible = useMemo(
-    () => (active === "all" ? categories : categories.filter((c) => c.id === active)),
-    [active],
+    () => (active === "all" ? menu : menu.filter((c) => c.id === active)),
+    [active, menu],
   );
 
   return (
@@ -49,7 +50,7 @@ function MenuPage() {
           <Chip active={active === "all"} onClick={() => setActive("all")}>
             {t.allCategories}
           </Chip>
-          {categories.map((c) => (
+          {menu.map((c) => (
             <Chip
               key={c.id}
               active={active === c.id}
@@ -79,7 +80,7 @@ function MenuPage() {
                       <h3 className="font-medium">{item.name}</h3>
                       {item.featured ? (
                         <span className="rounded-full bg-tomato/10 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-tomato">
-                          Favorite
+                          {t.favorite}
                         </span>
                       ) : null}
                       {item.tags?.map((tag) => (
@@ -87,7 +88,7 @@ function MenuPage() {
                           key={tag}
                           className="rounded-full bg-paper-2 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-muted"
                         >
-                          {tag}
+                          {translateTag(lang, tag)}
                         </span>
                       ))}
                     </div>

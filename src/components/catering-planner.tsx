@@ -1,9 +1,10 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Minus, Phone, Plus, Truck, Utensils, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Textarea } from "@/components/ui/input";
 import { planCatering } from "@/lib/plan-catering";
 import {
+  baselinePlan,
   describeEdits,
   estimateFromItems,
   formatPlanMessage,
@@ -49,11 +50,13 @@ export function CateringPlanner() {
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [source, setSource] = useState<"ai" | "menu" | null>(null);
+  const [source, setSource] = useState<"ai" | "menu" | "loading" | null>(null);
   const [plan, setPlan] = useState<CateringPlan | null>(null);
   const [originalItems, setOriginalItems] = useState<PlanItem[]>([]);
   const [items, setItems] = useState<EditableItem[]>([]);
   const [extraNotes, setExtraNotes] = useState("");
+  const [workStep, setWorkStep] = useState(0);
+  const waiting = source === "loading";
 
   const input = (): CateringInput => ({
     people: Number(people),
@@ -71,23 +74,40 @@ export function CateringPlanner() {
     [plan, items],
   );
 
+  useEffect(() => {
+    if (!waiting) return;
+    setWorkStep(0);
+    const id = window.setInterval(() => {
+      setWorkStep((n) => Math.min(n + 1, 3));
+    }, 1100);
+    return () => window.clearInterval(id);
+  }, [waiting]);
+
   async function onPlan(e: FormEvent) {
     e.preventDefault();
-    setBusy(true);
+    const data = input();
+    const first = baselinePlan(data);
     setError("");
+    setExtraNotes("");
+    setPlan(first);
+    setOriginalItems(first.items);
+    setItems(toEditableItems(first.items));
+    setSource("loading");
+    setBusy(true);
     try {
-      const result = await planCatering({ data: input() });
+      const result = await planCatering({ data });
       if (!result.ok) {
         setError(result.error);
+        setSource("menu");
         return;
       }
       setPlan(result.plan);
       setSource(result.source);
       setOriginalItems(result.plan.items);
       setItems(toEditableItems(result.plan.items));
-      setExtraNotes("");
     } catch {
       setError(t.plannerError);
+      setSource("menu");
     } finally {
       setBusy(false);
     }
@@ -118,7 +138,7 @@ export function CateringPlanner() {
       formatPlanMessage(input(), livePlan, {
         extraNotes,
         changes,
-        source: source ?? undefined,
+        source: source === "ai" || source === "menu" ? source : undefined,
       }),
     ].join("\n");
     const subject = `Catering plan — ${people} people${date ? ` ${date}` : ""}`;
@@ -256,13 +276,33 @@ export function CateringPlanner() {
                   {t.suggestedOrder}
                 </p>
                 <span className="inline-flex items-center rounded-full bg-gold px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-ink">
-                  {source === "ai" ? t.aiBadge : t.plannerMenuMath}
+                  {waiting ? t.aiWorkingBadge : source === "ai" ? t.aiBadge : t.plannerMenuMath}
                 </span>
               </div>
+              {waiting ? (
+                <div className="mt-4 rounded-lg bg-gold/15 px-4 py-4">
+                  <p className="text-sm font-medium text-gold-soft">{t.aiWorkingTitle}</p>
+                  <p className="mt-1 text-sm text-cream/80">{t.aiWorkingLead}</p>
+                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/15">
+                    <div className="planner-fill h-full rounded-full bg-gold" />
+                  </div>
+                  <p className="mt-2 text-xs text-gold-soft">
+                    {
+                      [
+                        t.plannerStepCrowd,
+                        t.plannerStepPies,
+                        t.plannerStepTrays,
+                        t.plannerStepVoice,
+                      ][workStep]
+                    }
+                  </p>
+                </div>
+              ) : (
+                <p className="mt-3 rounded-lg bg-gold/15 px-4 py-3 text-sm leading-relaxed text-gold-soft">
+                  {source === "ai" ? t.aiDisclosure : t.editHint}
+                </p>
+              )}
               <h3 className="mt-3 font-display text-3xl text-cream">{livePlan.headline}</h3>
-              <p className="mt-3 rounded-lg bg-gold/15 px-4 py-3 text-sm leading-relaxed text-gold-soft">
-                {source === "ai" ? t.aiDisclosure : t.editHint}
-              </p>
               <p className="mt-4 text-sm leading-relaxed text-cream/80">{livePlan.voice}</p>
               {items.length ? (
                 <ul className="mt-4 divide-y divide-white/15">
@@ -278,7 +318,8 @@ export function CateringPlanner() {
                         <button
                           type="button"
                           onClick={() => removeItem(item.id)}
-                          className="inline-flex size-11 shrink-0 items-center justify-center rounded-md text-cream/70 hover:bg-white/10 hover:text-gold-soft"
+                          disabled={waiting}
+                          className="inline-flex size-11 shrink-0 items-center justify-center rounded-md text-cream/70 hover:bg-white/10 hover:text-gold-soft disabled:opacity-40"
                           aria-label={`${t.removeItem}: ${item.name}`}
                         >
                           <X className="size-4" />
@@ -288,7 +329,7 @@ export function CateringPlanner() {
                         <button
                           type="button"
                           onClick={() => setCount(item.id, item.count - 1)}
-                          disabled={item.count <= 1}
+                          disabled={waiting || item.count <= 1}
                           className="inline-flex size-11 items-center justify-center rounded-md border border-white/25 bg-white/10 hover:bg-white/15 disabled:opacity-40"
                           aria-label={t.qtyDown}
                         >
@@ -300,7 +341,8 @@ export function CateringPlanner() {
                         <button
                           type="button"
                           onClick={() => setCount(item.id, item.count + 1)}
-                          className="inline-flex size-11 items-center justify-center rounded-md border border-white/25 bg-white/10 hover:bg-white/15"
+                          disabled={waiting}
+                          className="inline-flex size-11 items-center justify-center rounded-md border border-white/25 bg-white/10 hover:bg-white/15 disabled:opacity-40"
                           aria-label={t.qtyUp}
                         >
                           <Plus className="size-4" />
@@ -382,7 +424,7 @@ export function CateringPlanner() {
                   type="button"
                   variant="gold"
                   onClick={sendPlan}
-                  disabled={!name.trim() || !phone.trim()}
+                  disabled={waiting || !name.trim() || !phone.trim()}
                 >
                   {t.sendPlan}
                 </Button>
