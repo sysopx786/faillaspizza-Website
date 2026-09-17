@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Clock, MapPin, Phone, Wine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GoogleListingCard } from "@/components/google-listing";
 import { Input, Label, Textarea } from "@/components/ui/input";
+import { PLAN_STORAGE_KEY } from "@/components/catering-planner";
 import { site } from "@/lib/site";
 import { formatClock, upcomingHolidays } from "@/lib/hours";
 import { useOpenStatus, translateOpenStatus } from "@/components/hours-status";
@@ -26,6 +27,25 @@ function ContactPage() {
   const { t } = useI18n();
   const openCopy = translateOpenStatus(status, t);
   const nextHolidays = upcomingHolidays();
+
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(PLAN_STORAGE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw) as {
+        name?: string;
+        phone?: string;
+        email?: string;
+        message?: string;
+      };
+      if (saved.name) setName(saved.name);
+      if (saved.phone) setPhone(saved.phone);
+      if (saved.email) setEmail(saved.email);
+      if (saved.message) setMessage(saved.message);
+    } catch {
+      /* ignore bad session data */
+    }
+  }, []);
 
   return (
     <main className="mx-auto grid max-w-6xl gap-12 px-4 py-12 sm:px-6 lg:grid-cols-2">

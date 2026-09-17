@@ -14,7 +14,7 @@
     "preview:restart": "node scripts/preview.mjs restart",
     "preview:stop": "node scripts/preview.mjs stop",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test src/lib/hours.test.ts && node --test 'scripts/**/*.test.mjs'",
+    "test": "node --experimental-strip-types --test src/lib/hours.test.ts src/lib/catering-plan.test.ts && node --test 'scripts/**/*.test.mjs'",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

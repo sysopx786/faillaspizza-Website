@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Phone, Tent, Truck, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CateringPlanner } from "@/components/catering-planner";
 import { site } from "@/lib/site";
 import { useI18n } from "@/lib/i18n-provider";
 
@@ -24,13 +25,18 @@ function CateringPage() {
             <h1 className="mt-3 font-display text-5xl">{t.catTitle}</h1>
             <p className="mt-4 max-w-lg text-cream/75">{t.catLead}</p>
             <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#planner">
+                <Button size="lg" className="h-auto min-h-12 whitespace-normal py-3">
+                  {t.plannerHeroCta}
+                </Button>
+              </a>
               <a href={site.phoneHref}>
-                <Button size="lg">
+                <Button size="lg" variant="invert">
                   <Phone /> {site.phone}
                 </Button>
               </a>
               <Link to="/contact">
-                <Button size="lg" variant="invert">
+                <Button size="lg" variant="ghost">
                   {t.sendNote}
                 </Button>
               </Link>
@@ -85,6 +91,8 @@ function CateringPage() {
           </article>
         ))}
       </section>
+
+      <CateringPlanner />
 
       <section className="border-t border-line">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
